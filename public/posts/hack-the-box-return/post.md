@@ -2,49 +2,12 @@
 title: "Hack the Box - Return"
 slug: "hack-the-box-return"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. User found to be part of a privilege group which further exploited to gain system access."
 cover: "cover.png"
 tags:
-  - 
+  - LDAP
+  - VSS
 ---
-
-## Summary
-### System Information
-```text
-IP: 10.10.11.108
-OS: Windows 10.0 Build 17763 x64
-Hostname: PRINTER
-Domain: return.local
-```
-### Credentials
-```text
-return\svc-printer:1edFg43012!!
-```
-
-### Hashes
-```text
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:32db622ed9c00dd1039d8288b0407460:::
-return.local\svc-printer:1103:aad3b435b51404eeaad3b435b51404ee:c1d26bdcecf44246b5f8653284331a2e:::
-```
-
-## Enumeration
-### Ports
-```text
-PORT     STATE SERVICE       VERSION
-53/tcp   open  domain        Simple DNS Plus
-80/tcp   open  http          Microsoft IIS httpd 10.0
-88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-05-25 02:20:43Z)
-135/tcp  open  msrpc         Microsoft Windows RPC
-139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
-389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: return.local0., Site: Default-First-Site-Name)
-445/tcp  open  microsoft-ds?
-464/tcp  open  kpasswd5?
-593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
-636/tcp  open  tcpwrapped
-3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: return.local0., Site: Default-First-Site-Name)
-3269/tcp open  tcpwrapped
-
-```
 
 ## Writeup
 ### Foothold

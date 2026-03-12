@@ -2,47 +2,14 @@
 title: "Hack the Box - Office"
 slug: "hack-the-box-office"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Office is a hard-difficulty Windows machine featuring various vulnerabilities including Joomla web application abuse, PCAP analysis to identify Kerberos credentials, abusing LibreOffice macros after disabling the `MacroSecurityLevel` registry value, abusing MSKRP to dump DPAPI credentials and abusing Group Policies due to excessive Active Directory privileges."
 cover: "cover.png"
 tags:
-  - 
+  - PCAP
+  - Macros
+  - DPAPI
+  - GPO
 ---
-
-## Summary
-### System Information
-```text
-IP: 10.10.11.3
-OS: Windows
-Hostname: office.htb
-```
-
-### Credentials
-```text
-
-```
-
-### Hashes
-```text
-
-```
-
-### Ports
-```text
-53/tcp   open  domain        Simple DNS Plus
-80/tcp   open  http          Apache httpd 2.4.56 ((Win64) OpenSSL/1.1.1t PHP/8.0.28)
-88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2024-05-24 09:25:00Z)
-139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
-389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: office.htb0., Site: Default-First-Site-Name)
-443/tcp  open  ssl/http      Apache httpd 2.4.56 (OpenSSL/1.1.1t PHP/8.0.28)
-445/tcp  open  microsoft-ds?
-464/tcp  open  kpasswd5?
-593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
-636/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: office.htb0., Site: Default-First-Site-Name)
-3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: office.htb0., Site: Default-First-Site-Name)
-3269/tcp open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: office.htb0., Site: Default-First-Site-Name)
-``` 
-
-***
 
 ## Enumeration
 ### NMAP

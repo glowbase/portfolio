@@ -2,10 +2,12 @@
 title: "Hack the Box - Jab"
 slug: "hack-the-box-jab"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Jab is a medium-difficulty Windows machine that features an Openfire XMPP server, hosted on a Domain Controller (DC). Public registration on the XMPP server allows the user to register an account. Then, by retrieving a list of all the users on the domain, a kerberoastable account is found, which allows the attacker to crack the retrieved hash for the user's password. By visiting the account's XMPP chat rooms, another account's password is retrieved. This new account has DCOM privileges over the DC, thus granting the attacker local access on the machine. Finally, a malicious plugin uploaded through the locally-hosted Openfire Administration Panel gives the user SYSTEM access."
 cover: "cover.png"
 tags:
-  - 
+  - XMPP
+  - Kerberoast
+  - DCOM
 ---
 
 ## Summary

@@ -2,10 +2,13 @@
 title: "Hack the Box - Talkative"
 slug: "hack-the-box-talkative"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Talkative is a hard Linux machine that starts off with a command injection in the `Jamovi` web application, which leads us into the `Jamovi` docker in which we find an `omv` file. Decompressing this `omv` file gives us the credentials for the `admin` user in Bolt CMS. This leads us to get a shell as user `www-data` by exploiting a Server Side Template Injection in `twig`. Further network enumeration gives us a shell as user `saul` on the host. For `root` we need to leverage port forwarding for connecting to a `MongoDB` server running in a separate container and through that we need to modify RocketChat's registered user role in order to access the admin's dashboard in the RocketChat web GUI. Further exploitation of the RocketChat's webhook functionality gives us a `root` shell in the RocketChat docker container. Since we are `root` in the docker container, we can install `libcap2` and view the system capabilities, which lead to abusing the `CAP_DAC_READ_SEARCH` capability to run the `shocker` exploit and read the root flag."
 cover: "cover.png"
 tags:
-  - 
+  - SSTI
+  - MongoDB
+  - CAP_DAC_READ_SEARCH
+  - WebHook
 ---
 
 ## NMAP

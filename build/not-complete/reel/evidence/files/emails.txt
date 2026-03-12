@@ -1,4 +1,0 @@
-test@test.com
-test@reel.com
-test@megabank.com
-nico@megabank.com

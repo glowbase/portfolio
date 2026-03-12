@@ -2,10 +2,12 @@
 title: "Hack the Box - Topology"
 slug: "hack-the-box-topology"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Topology is an Easy Difficulty Linux machine that showcases a `LaTeX` web application susceptible to a Local File Inclusion (LFI) vulnerability. Exploiting the LFI flaw allows for the retrieval of an `.htpasswd` file that contains a hashed password. By cracking the password hash, `SSH` access to the machine is obtained, revealing a `root` cronjob that executes `gnuplot` files. Crafting a malicious `.plt` file enables privilege escalation."
 cover: "cover.png"
 tags:
-  - 
+  - LFI
+  - .htpasswd
+  - CRON
 ---
 
 ## Enumeration

@@ -116,7 +116,7 @@ whoami
 
 ![](./whoami.png)
 
-We are already `NT AUTHORITY\SYSTEM`. We can now gather `proof.txt`.
+We are already `NT AUTHORITY/SYSTEM`. We can now gather `proof.txt`.
 
 ```powershell
 dir /s /p proof.txt

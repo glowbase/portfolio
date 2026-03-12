@@ -2,10 +2,13 @@
 title: "Hack the Box - Mailing"
 slug: "hack-the-box-mailing"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Mailing is an easy Windows machine that runs `hMailServer` and hosts a website vulnerable to `Path Traversal`. This vulnerability can be exploited to access the `hMailServer` configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage CVE-2024-21413 in the Windows Mail application on the remote host to capture the NTLM hash for user `maya`. We can then crack this hash to obtain the password and log in as user `maya` via WinRM. For privilege escalation, we exploit CVE-2023-2255 in `LibreOffice`."
 cover: "cover.png"
 tags:
-  - 
+  - Path Traversal
+  - hMailServer
+  - CVE-2024-21413
+  - CVE-2023-2255
 ---
 
 ## Summary

@@ -31,10 +31,13 @@
     "title": "Hack the Box - Busqueda",
     "slug": "hack-the-box-busqueda",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a `Python` module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to `root`, we discover credentials within a `Git` config file, allowing us to log into a local `Gitea` service. Additionally, we uncover that a system checkup script can be executed with `root` privileges by a specific user. By utilizing this script, we enumerate `Docker` containers that reveal credentials for the `administrator` user's `Gitea` account. Further analysis of the system checkup script's source code in a `Git` repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with `root` privileges.",
     "cover": "/posts/hack-the-box-busqueda/cover.png",
     "tags": [
-      null
+      "Command Injection",
+      "RCE",
+      "Docker",
+      "Git"
     ],
     "markdown": "/posts/hack-the-box-busqueda/post.md"
   },
@@ -96,10 +99,12 @@
     "title": "Hack the Box - Inject",
     "slug": "hack-the-box-inject",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Inject is an Easy Difficulty Linux machine featuring a website with file upload functionality vulnerable to Local File Inclusion (LFI). By exploiting the LFI vulnerability, files on the system can be enumerated, revealing that the web application uses a specific version of the `Spring-Cloud-Function-Web` module susceptible to `CVE-2022-22963`. Exploiting this vulnerability grants an initial foothold as the `frank` user. Lateral movement is achieved by further file enumeration, which discloses a plaintext password for `phil`. A cronjob running on the machine can then be exploited to execute a malicious `Ansible` playbook, ultimately obtaining a reverse shell as the `root` user.",
     "cover": "/posts/hack-the-box-inject/cover.png",
     "tags": [
-      null
+      "CVE-2022-22963",
+      "LFI",
+      "Ansible"
     ],
     "markdown": "/posts/hack-the-box-inject/post.md"
   },
@@ -120,10 +125,12 @@
     "title": "Hack the Box - Jab",
     "slug": "hack-the-box-jab",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Jab is a medium-difficulty Windows machine that features an Openfire XMPP server, hosted on a Domain Controller (DC). Public registration on the XMPP server allows the user to register an account. Then, by retrieving a list of all the users on the domain, a kerberoastable account is found, which allows the attacker to crack the retrieved hash for the user's password. By visiting the account's XMPP chat rooms, another account's password is retrieved. This new account has DCOM privileges over the DC, thus granting the attacker local access on the machine. Finally, a malicious plugin uploaded through the locally-hosted Openfire Administration Panel gives the user SYSTEM access.",
     "cover": "/posts/hack-the-box-jab/cover.png",
     "tags": [
-      null
+      "XMPP",
+      "Kerberoast",
+      "DCOM"
     ],
     "markdown": "/posts/hack-the-box-jab/post.md"
   },
@@ -131,10 +138,13 @@
     "title": "Hack the Box - Mailing",
     "slug": "hack-the-box-mailing",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Mailing is an easy Windows machine that runs `hMailServer` and hosts a website vulnerable to `Path Traversal`. This vulnerability can be exploited to access the `hMailServer` configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage CVE-2024-21413 in the Windows Mail application on the remote host to capture the NTLM hash for user `maya`. We can then crack this hash to obtain the password and log in as user `maya` via WinRM. For privilege escalation, we exploit CVE-2023-2255 in `LibreOffice`.",
     "cover": "/posts/hack-the-box-mailing/cover.png",
     "tags": [
-      null
+      "Path Traversal",
+      "hMailServer",
+      "CVE-2024-21413",
+      "CVE-2023-2255"
     ],
     "markdown": "/posts/hack-the-box-mailing/post.md"
   },
@@ -166,10 +176,13 @@
     "title": "Hack the Box - Office",
     "slug": "hack-the-box-office",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Office is a hard-difficulty Windows machine featuring various vulnerabilities including Joomla web application abuse, PCAP analysis to identify Kerberos credentials, abusing LibreOffice macros after disabling the `MacroSecurityLevel` registry value, abusing MSKRP to dump DPAPI credentials and abusing Group Policies due to excessive Active Directory privileges.",
     "cover": "/posts/hack-the-box-office/cover.png",
     "tags": [
-      null
+      "PCAP",
+      "Macros",
+      "DPAPI",
+      "GPO"
     ],
     "markdown": "/posts/hack-the-box-office/post.md"
   },
@@ -177,12 +190,28 @@
     "title": "Hack the Box - Opensource",
     "slug": "hack-the-box-opensource",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Virtual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell.",
     "cover": "/posts/hack-the-box-opensource/cover.png",
     "tags": [
-      null
+      "Git",
+      "RCE",
+      "Pspy",
+      "Docker"
     ],
     "markdown": "/posts/hack-the-box-opensource/post.md"
+  },
+  {
+    "title": "Hack the Box - PC",
+    "slug": "hack-the-box-pc",
+    "date": "2024-03-14",
+    "excerpt": "PC is an Easy Difficulty Linux machine that features a `gRPC` endpoint that is vulnerable to SQL Injection. After enumerating and dumping the database's contents, plaintext credentials lead to `SSH` access to the machine. Listing locally running ports reveals an outdated version of the `pyLoad` service, which is susceptible to pre-authentication Remote Code Execution (RCE) via `CVE-2023-0297`. As the service is run by `root`, exploiting this vulnerability leads to fully elevated privileges.",
+    "cover": "/posts/hack-the-box-pc/cover.png",
+    "tags": [
+      "CVE-2023-0297",
+      "gRPC",
+      "pyLoad"
+    ],
+    "markdown": "/posts/hack-the-box-pc/post.md"
   },
   {
     "title": "Hack the Box - Perspective",
@@ -215,10 +244,12 @@
     "title": "Hack the Box - Resolute",
     "slug": "hack-the-box-resolute",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Resolute is an easy difficulty Windows machine that features Active Directory. The Active Directory anonymous bind is used to obtain a password that the sysadmins set for new user accounts, although it seems that the password for that account has since changed. A password spray reveals that this password is still in use for another domain user account, which gives us access to the system over WinRM. A PowerShell transcript log is discovered, which has captured credentials passed on the command-line. This is used to move laterally to a user that is a member of the DnsAdmins group. This group has the ability to specify that the DNS Server service loads a plugin DLL. After restarting the DNS service, we achieve command execution on the domain controller in the context of `NT_AUTHORITY\\SYSTEM`.",
     "cover": "/posts/hack-the-box-resolute/cover.png",
     "tags": [
-      null
+      "Active Directory",
+      "DNS Plugin",
+      "PSTranscript"
     ],
     "markdown": "/posts/hack-the-box-resolute/post.md"
   },
@@ -226,10 +257,11 @@
     "title": "Hack the Box - Return",
     "slug": "hack-the-box-return",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. User found to be part of a privilege group which further exploited to gain system access.",
     "cover": "/posts/hack-the-box-return/cover.png",
     "tags": [
-      null
+      "LDAP",
+      "VSS"
     ],
     "markdown": "/posts/hack-the-box-return/post.md"
   },
@@ -237,10 +269,12 @@
     "title": "Hack the Box - Sauna",
     "slug": "hack-the-box-sauna",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Sauna is an easy difficulty Windows machine that features Active Directory enumeration and exploitation. Possible usernames can be derived from employee full names listed on the website. With these usernames, an ASREPRoasting attack can be performed, which results in hash for an account that doesn't require Kerberos pre-authentication. This hash can be subjected to an offline brute force attack, in order to recover the plaintext password for a user that is able to WinRM to the box. Running WinPEAS reveals that another system user has been configured to automatically login and it identifies their password. This second user also has Windows remote management permissions. BloodHound reveals that this user has the *DS-Replication-Get-Changes-All* extended right, which allows them to dump password hashes from the Domain Controller in a DCSync attack. Executing this attack returns the hash of the primary domain administrator, which can be used with Impacket's psexec.py in order to gain a shell on the box as `NT_AUTHORITY\\SYSTEM`.",
     "cover": "/posts/hack-the-box-sauna/cover.png",
     "tags": [
-      null
+      "ASREPRoasting",
+      "DCSync",
+      "Remote Management"
     ],
     "markdown": "/posts/hack-the-box-sauna/post.md"
   },
@@ -248,10 +282,12 @@
     "title": "Hack the Box - Scrambled",
     "slug": "hack-the-box-scrambled",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Scrambled is a medium Windows Active Directory machine. Enumerating the website hosted on the remote machine a potential attacker is able to deduce the credentials for the user `ksimpson`. On the website, it is also stated that NTLM authentication is disabled meaning that Kerberos authentication is to be used. Accessing the `Public` share with the credentials of `ksimpson`, a PDF file states that an attacker retrieved the credentials of an SQL database. This is a hint that there is an SQL service running on the remote machine. Enumerating the normal user accounts, it is found that the account `SqlSvc` has a `Service Principal Name` (SPN) associated with it. An attacker can use this information to perform an attack that is knows as `kerberoasting` and get the hash of `SqlSvc`. After cracking the hash and acquiring the credentials for the `SqlSvc` account an attacker can perform a `silver ticket` attack to forge a ticket and impersonate the user `Administrator` on the remote MSSQL service. Enumeration of the database reveals the credentials for user `MiscSvc`, which can be used to execute code on the remote machine using PowerShell remoting. System enumeration as the new user reveals a `.NET` application, which is listening on port `4411`. Reverse engineering the application reveals that it is using the insecure `Binary Formatter` class to transmit data, allowing the attacker to upload their own payload and get code execution as `NT AUTHORITY/SYSTEM`.",
     "cover": "/posts/hack-the-box-scrambled/cover.png",
     "tags": [
-      null
+      "MSSQL",
+      "Kerberoast",
+      "Reverse Engineering"
     ],
     "markdown": "/posts/hack-the-box-scrambled/post.md"
   },
@@ -272,10 +308,11 @@
     "title": "Hack the Box - Stocker",
     "slug": "hack-the-box-stocker",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Stocker is a medium difficulty Linux machine that features a website running on port 80 that advertises various house furniture. Through vHost enumeration the hostname `dev.stocker.htb` is identified and upon accessing it a login page is loaded that seems to be built with `NodeJS`. By sending JSON data and performing a `NoSQL` injection, the login page is bypassed and access to an e-shop is granted. Enumeration of this e-shop reveals that upon submitting a purchase order, a PDF is crafted that contains details about the items purchased. This functionality is vulnerable to HTML injection and can be abused to read system files through the usage of iframes. The `index.js` file is then read to acquire database credentials and owed to password re-use users can log into the system over `SSH`. Privileges can then be escalated by performing a path traversal attack on a command defined in the sudoers file, which contains a wildcard for executing `JavaScript` files.",
     "cover": "/posts/hack-the-box-stocker/cover.png",
     "tags": [
-      null
+      "Injection",
+      "Path Traversal"
     ],
     "markdown": "/posts/hack-the-box-stocker/post.md"
   },
@@ -297,10 +334,12 @@
     "title": "Hack the Box - Support",
     "slug": "hack-the-box-support",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Support is an Easy difficulty Windows machine that features an SMB share that allows anonymous authentication. After connecting to the share, an executable file is discovered that is used to query the machine's LDAP server for available users. Through reverse engineering, network analysis or emulation, the password that the binary uses to bind the LDAP server is identified and can be used to make further LDAP queries. A user called `support` is identified in the users list, and the `info` field is found to contain his password, thus allowing for a WinRM connection to the machine. Once on the machine, domain information can be gathered through `SharpHound`, and `BloodHound` reveals that the `Shared Support Accounts` group that the `support` user is a member of, has `GenericAll` privileges on the Domain Controller. A Resource Based Constrained Delegation attack is performed, and a shell as `NT Authority/System` is received.",
     "cover": "/posts/hack-the-box-support/cover.png",
     "tags": [
-      null
+      "LDAP",
+      "GenericAll",
+      "RBCD"
     ],
     "markdown": "/posts/hack-the-box-support/post.md"
   },
@@ -308,10 +347,13 @@
     "title": "Hack the Box - Talkative",
     "slug": "hack-the-box-talkative",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Talkative is a hard Linux machine that starts off with a command injection in the `Jamovi` web application, which leads us into the `Jamovi` docker in which we find an `omv` file. Decompressing this `omv` file gives us the credentials for the `admin` user in Bolt CMS. This leads us to get a shell as user `www-data` by exploiting a Server Side Template Injection in `twig`. Further network enumeration gives us a shell as user `saul` on the host. For `root` we need to leverage port forwarding for connecting to a `MongoDB` server running in a separate container and through that we need to modify RocketChat's registered user role in order to access the admin's dashboard in the RocketChat web GUI. Further exploitation of the RocketChat's webhook functionality gives us a `root` shell in the RocketChat docker container. Since we are `root` in the docker container, we can install `libcap2` and view the system capabilities, which lead to abusing the `CAP_DAC_READ_SEARCH` capability to run the `shocker` exploit and read the root flag.",
     "cover": "/posts/hack-the-box-talkative/cover.png",
     "tags": [
-      null
+      "SSTI",
+      "MongoDB",
+      "CAP_DAC_READ_SEARCH",
+      "WebHook"
     ],
     "markdown": "/posts/hack-the-box-talkative/post.md"
   },
@@ -331,10 +373,12 @@
     "title": "Hack the Box - Topology",
     "slug": "hack-the-box-topology",
     "date": "2024-03-14",
-    "excerpt": "",
+    "excerpt": "Topology is an Easy Difficulty Linux machine that showcases a `LaTeX` web application susceptible to a Local File Inclusion (LFI) vulnerability. Exploiting the LFI flaw allows for the retrieval of an `.htpasswd` file that contains a hashed password. By cracking the password hash, `SSH` access to the machine is obtained, revealing a `root` cronjob that executes `gnuplot` files. Crafting a malicious `.plt` file enables privilege escalation.",
     "cover": "/posts/hack-the-box-topology/cover.png",
     "tags": [
-      null
+      "LFI",
+      ".htpasswd",
+      "CRON"
     ],
     "markdown": "/posts/hack-the-box-topology/post.md"
   },

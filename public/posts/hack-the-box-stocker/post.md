@@ -2,38 +2,12 @@
 title: "Hack the Box - Stocker"
 slug: "hack-the-box-stocker"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Stocker is a medium difficulty Linux machine that features a website running on port 80 that advertises various house furniture. Through vHost enumeration the hostname `dev.stocker.htb` is identified and upon accessing it a login page is loaded that seems to be built with `NodeJS`. By sending JSON data and performing a `NoSQL` injection, the login page is bypassed and access to an e-shop is granted. Enumeration of this e-shop reveals that upon submitting a purchase order, a PDF is crafted that contains details about the items purchased. This functionality is vulnerable to HTML injection and can be abused to read system files through the usage of iframes. The `index.js` file is then read to acquire database credentials and owed to password re-use users can log into the system over `SSH`. Privileges can then be escalated by performing a path traversal attack on a command defined in the sudoers file, which contains a wildcard for executing `JavaScript` files."
 cover: "cover.png"
 tags:
-  - 
+  - Injection
+  - Path Traversal
 ---
-
-## Summary
-### System Information
-```text
-IP: 10.10.11.196
-OS: Linux
-Hostname: stocker.htb
-```
-
-### Credentials
-```text
-angoose:IHeardPassphrasesArePrettySecure
-```
-
-### Hashes
-```text
-root:$6$EZqTwEpX4KybzpVB$BO02GOjBAfc/gEUXTNVQ3J2xQFeS4sGXNnr/zporRnTKZ46fskNi.ijPrSowdfcDn4xi4p.hCGVMaolooyHHv1:19332:0:99999:7:::
-angoose:$6$8iwZVU6fVD77ubDf$bxwtXVrJQdmmOByc0T2BwfWRe6I3pInHkQD1WmqJ8e5LkzLzDspjNYaRoNMzygN3uhheZRtPFGDfwGlMoCRSG0:19332:0:99999:7:::
-```
-
-### Ports
-```text
-22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
-80/tcp open  http    nginx 1.18.0 (Ubuntu)
-```
-
-***
 
 ## Enumeration
 ### NMAP

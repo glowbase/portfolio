@@ -2,38 +2,14 @@
 title: "Hack the Box - Busqueda"
 slug: "hack-the-box-busqueda"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a `Python` module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to `root`, we discover credentials within a `Git` config file, allowing us to log into a local `Gitea` service. Additionally, we uncover that a system checkup script can be executed with `root` privileges by a specific user. By utilizing this script, we enumerate `Docker` containers that reveal credentials for the `administrator` user's `Gitea` account. Further analysis of the system checkup script's source code in a `Git` repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with `root` privileges."
 cover: "cover.png"
 tags:
-  - 
+  - Command Injection
+  - RCE
+  - Docker
+  - Git
 ---
-
-## Summary
-### System Information
-```text
-IP: 10.10.11.208
-OS: Linux
-Hostname: searcher.htb
-```
-
-### Credentials
-```text
-cody:jh1usoih2bkjaspwe92
-administrator:yuiu1hoiu4i5ho1uh
-```
-
-### Hashes
-```text
-
-```
-
-### Ports
-```text
-22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
-80/tcp open  http    Apache httpd 2.4.52
-```
-
-***
 
 ## Enumeration
 ### NMAP
