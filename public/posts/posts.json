@@ -28,6 +28,17 @@
     "markdown": "/posts/hack-the-box-blackfield/post.md"
   },
   {
+    "title": "Hack the Box - Busqueda",
+    "slug": "hack-the-box-busqueda",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-busqueda/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-busqueda/post.md"
+  },
+  {
     "title": "Hack the Box - Cascade",
     "slug": "hack-the-box-cascade",
     "date": "2024-03-14",
@@ -82,6 +93,17 @@
     "markdown": "/posts/hack-the-box-forge/post.md"
   },
   {
+    "title": "Hack the Box - Inject",
+    "slug": "hack-the-box-inject",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-inject/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-inject/post.md"
+  },
+  {
     "title": "Hack the Box - Intelligence",
     "slug": "hack-the-box-intelligence",
     "date": "2024-03-14",
@@ -93,6 +115,28 @@
       "GMSA"
     ],
     "markdown": "/posts/hack-the-box-intelligence/post.md"
+  },
+  {
+    "title": "Hack the Box - Jab",
+    "slug": "hack-the-box-jab",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-jab/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-jab/post.md"
+  },
+  {
+    "title": "Hack the Box - Mailing",
+    "slug": "hack-the-box-mailing",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-mailing/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-mailing/post.md"
   },
   {
     "title": "Hack the Box - Mirai",
@@ -117,6 +161,28 @@
       "ADSync"
     ],
     "markdown": "/posts/hack-the-box-monteverde/post.md"
+  },
+  {
+    "title": "Hack the Box - Office",
+    "slug": "hack-the-box-office",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-office/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-office/post.md"
+  },
+  {
+    "title": "Hack the Box - Opensource",
+    "slug": "hack-the-box-opensource",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-opensource/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-opensource/post.md"
   },
   {
     "title": "Hack the Box - Perspective",
@@ -146,6 +212,50 @@
     "markdown": "/posts/hack-the-box-redpanda/post.md"
   },
   {
+    "title": "Hack the Box - Resolute",
+    "slug": "hack-the-box-resolute",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-resolute/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-resolute/post.md"
+  },
+  {
+    "title": "Hack the Box - Return",
+    "slug": "hack-the-box-return",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-return/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-return/post.md"
+  },
+  {
+    "title": "Hack the Box - Sauna",
+    "slug": "hack-the-box-sauna",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-sauna/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-sauna/post.md"
+  },
+  {
+    "title": "Hack the Box - Scrambled",
+    "slug": "hack-the-box-scrambled",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-scrambled/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-scrambled/post.md"
+  },
+  {
     "title": "Hack the Box - Search",
     "slug": "hack-the-box-search",
     "date": "2024-03-14",
@@ -157,6 +267,17 @@
       "GMSA"
     ],
     "markdown": "/posts/hack-the-box-search/post.md"
+  },
+  {
+    "title": "Hack the Box - Stocker",
+    "slug": "hack-the-box-stocker",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-stocker/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-stocker/post.md"
   },
   {
     "title": "Hack the Box - StreamIO",
@@ -173,6 +294,28 @@
     "markdown": "/posts/hack-the-box-streamio/post.md"
   },
   {
+    "title": "Hack the Box - Support",
+    "slug": "hack-the-box-support",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-support/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-support/post.md"
+  },
+  {
+    "title": "Hack the Box - Talkative",
+    "slug": "hack-the-box-talkative",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-talkative/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-talkative/post.md"
+  },
+  {
     "title": "Hack the Box - Timelapse",
     "slug": "hack-the-box-timelapse",
     "date": "2024-03-14",
@@ -183,6 +326,17 @@
       "LAPS"
     ],
     "markdown": "/posts/hack-the-box-timelapse/post.md"
+  },
+  {
+    "title": "Hack the Box - Topology",
+    "slug": "hack-the-box-topology",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/hack-the-box-topology/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/hack-the-box-topology/post.md"
   },
   {
     "title": "Hack the Box - Trick",
@@ -207,6 +361,171 @@
       "Electronics"
     ],
     "markdown": "/posts/hacking-silent-sounds-headphones/post.md"
+  },
+  {
+    "title": "OffSec - Trick",
+    "slug": "offsec-trick",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-alice/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-alice/post.md"
+  },
+  {
+    "title": "OffSec - Alpha",
+    "slug": "offsec-alpha",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-alpha/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-alpha/post.md"
+  },
+  {
+    "title": "OffSec - Beta",
+    "slug": "offsec-beta",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-beta/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-beta/post.md"
+  },
+  {
+    "title": "OffSec - Bob",
+    "slug": "offsec-bob",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-bob/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-bob/post.md"
+  },
+  {
+    "title": "OffSec - Chris",
+    "slug": "offsec-chris",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-chris/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-chris/post.md"
+  },
+  {
+    "title": "OffSec - Disco",
+    "slug": "offsec-disco",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-disco/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-disco/post.md"
+  },
+  {
+    "title": "OffSec - Exam",
+    "slug": "offsec-exam",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-exam/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-exam/post.md"
+  },
+  {
+    "title": "OffSec - Hotline",
+    "slug": "offsec-hotline",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-hotline/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-hotline/post.md"
+  },
+  {
+    "title": "OffSec - Mailman",
+    "slug": "offsec-mailman",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-mailman/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-mailman/post.md"
+  },
+  {
+    "title": "OffSec - Offsec",
+    "slug": "offsec-offsec",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-offsec/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-offsec/post.md"
+  },
+  {
+    "title": "OffSec - Pain",
+    "slug": "offsec-pain",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-pain/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-pain/post.md"
+  },
+  {
+    "title": "OffSec - Phoenix",
+    "slug": "offsec-phoenix",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-phoenix/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-phoenix/post.md"
+  },
+  {
+    "title": "OffSec - Ralph",
+    "slug": "offsec-ralph",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-ralph/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-ralph/post.md"
+  },
+  {
+    "title": "OffSec - Susie",
+    "slug": "offsec-susie",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-susie/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-susie/post.md"
+  },
+  {
+    "title": "OffSec - SVCorp",
+    "slug": "offsec-svcorp",
+    "date": "2024-03-14",
+    "excerpt": "",
+    "cover": "/posts/offsec-svcorp/cover.png",
+    "tags": [
+      null
+    ],
+    "markdown": "/posts/offsec-svcorp/post.md"
   },
   {
     "title": "Thoughts on eJPT",
