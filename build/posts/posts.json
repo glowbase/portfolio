@@ -1,0 +1,183 @@
+[
+  {
+    "title": "Hack the Box - Active",
+    "slug": "hack-the-box-active",
+    "date": "2024-03-14",
+    "excerpt": "Active is an easy to medium difficulty machine, which features two very prevalent techniques to gain privileges within an Active Directory environment.",
+    "cover": "/posts/hack-the-box-active/cover.png",
+    "tags": [
+      "GPO",
+      "PSExec",
+      "Hashcat"
+    ],
+    "markdown": "/posts/hack-the-box-active/post.md"
+  },
+  {
+    "title": "Hack the Box - Blackfield",
+    "slug": "hack-the-box-blackfield",
+    "date": "2024-03-14",
+    "excerpt": "Backfield is a hard difficulty Windows machine featuring Windows and Active Directory misconfigurations. Anonymous / Guest access to an SMB share is used to enumerate users. Once user is found to have Kerberos pre-authentication disabled, which allows us to conduct an ASREPRoasting attack. This allows us to retrieve a hash of the encrypted material contained in the AS-REP, which can be subjected to an offline brute force attack in order to recover the plaintext password. With this user we can access an SMB share containing forensics artefacts, including an lsass process dump. This contains a username and a password for a user with WinRM privileges, who is also a member of the Backup Operators group. The privileges conferred by this privileged group are used to dump the Active Directory database, and retrieve the hash of the primary domain administrator.",
+    "cover": "/posts/hack-the-box-blackfield/cover.png",
+    "tags": [
+      "ASREPRoasing",
+      "Backup Operators",
+      "WinRM",
+      "LSASS",
+      "Guest SMB"
+    ],
+    "markdown": "/posts/hack-the-box-blackfield/post.md"
+  },
+  {
+    "title": "Hack the Box - Cascade",
+    "slug": "hack-the-box-cascade",
+    "date": "2024-03-14",
+    "excerpt": "Cascade is a medium difficulty Windows machine configured as a Domain Controller. LDAP anonymous binds are enabled, and enumeration yields the password for user `r.thompson`, which gives access to a `TightVNC` registry backup. The backup is decrypted to gain the password for `s.smith`. This user has access to a .NET executable, which after decompilation and source code analysis reveals the password for the `ArkSvc` account. This account belongs to the `AD Recycle Bin` group, and is able to view deleted Active Directory objects. One of the deleted user accounts is found to contain a hardcoded password, which can be reused to login as the primary domain administrator.",
+    "cover": "/posts/hack-the-box-cascade/cover.png",
+    "tags": [
+      "LDAP",
+      "TightVNC",
+      "Decompilation"
+    ],
+    "markdown": "/posts/hack-the-box-cascade/post.md"
+  },
+  {
+    "title": "Hack the Box - Faculty",
+    "slug": "hack-the-box-faculty",
+    "date": "2024-03-14",
+    "excerpt": "Faculty is a medium Linux machine that features a PHP web application that uses a library which is vulnerable to local file inclusion. Exploiting the LFi in this library reveals a password which can be used to log in as a low-level user called `gbyolo` over SSH. The user `gbyolo` has permission to run an `npm` package called `meta-git` as the `developer` user. The version of the `meta-git` installed on this box is vulnerable to code injection, which can be exploited to escalate the privileges to the user `developer`. The privilege escalation to `root` can be performed by exploiting the `CAP_SYS_PTRACE` capability to inject shellcode into a process running as `root`.",
+    "cover": "/posts/hack-the-box-faculty/cover.png",
+    "tags": [
+      "CAP_SYS_PTRACE",
+      "SQLi",
+      "LFI",
+      "NPM"
+    ],
+    "markdown": "/posts/hack-the-box-faculty/post.md"
+  },
+  {
+    "title": "Hack the Box - Forest",
+    "slug": "hack-the-box-forest",
+    "date": "2024-03-14",
+    "excerpt": "Forest is an easy Windows machine that showcases a Domain Controller (DC) for a domain in which Exchange Server has been installed. The DC allows anonymous LDAP binds, which are used to enumerate domain objects. The password for a service account with Kerberos pre-authentication disabled can be cracked to gain a foothold. The service account is found to be a member of the Account Operators group, which can be used to add users to privileged Exchange groups. The Exchange group membership is leveraged to gain DCSync privileges on the domain and dump the NTLM hashes, compromising the system.",
+    "cover": "/posts/hack-the-box-forest/cover.png",
+    "tags": [
+      "LDAP",
+      "DCSync",
+      "ASREPRoast",
+      "PtH"
+    ],
+    "markdown": "/posts/hack-the-box-forest/post.md"
+  },
+  {
+    "title": "Hack the Box - Forge",
+    "slug": "hack-the-box-forge",
+    "date": "2024-03-14",
+    "excerpt": "Forge is a medium linux machine that features an SSRF vulnerability on the main webpage that can be exploited to access services that are available only on localhost. Specifically, an FTP server is running but it's behind a firewall that prevents any connection except from localhost. Virtual host brute forcing reveals a new admin virtual host that is also blocked from external connections. The main webpage provides the ability to upload image files from URLs, but there are no checks in place to validate if the file is a real image or not. Thus allowing an attacker to specify a URL to a machine he controls in order to redirect the traffic to the internal services running on the box. Data exfiltration from the internal admin virtual host reveals credentials that can be used to access the FTP server, exploiting the same SSRF vulnerability. Through the FTP, the SSH key for `user` can be extracted. Privilege escalation relies on a Python script that `user` is able to execute using sudo. Triggering an error on the script will cause it to execute `Pdb`, an interactive Python debugger that can interpret Python commands. Since `Pdb` is running as `root`, because the main script was executed using `sudo`, a root shell can be spawned.",
+    "cover": "/posts/hack-the-box-forge/cover.png",
+    "tags": [
+      "SSRF",
+      "PDB",
+      "Arbitrary Upload"
+    ],
+    "markdown": "/posts/hack-the-box-forge/post.md"
+  },
+  {
+    "title": "Hack the Box - Intelligence",
+    "slug": "hack-the-box-intelligence",
+    "date": "2024-03-14",
+    "excerpt": "Intelligence is a medium difficulty Windows machine that showcases a number of common attacks in an Active Directory environment. After retrieving internal PDF documents stored on the web server (by brute-forcing a common naming scheme) and inspecting their contents and metadata, which reveal a default password and a list of potential AD users, password spraying leads to the discovery of a valid user account, granting initial foothold on the system. A scheduled PowerShell script that sends authenticated requests to web servers based on their hostname is discovered; by adding a custom DNS record, it is possible to force a request that can be intercepted to capture the hash of a second user, which is easily crackable. This user is allowed to read the password of a group managed service account, which in turn has constrained delegation access to the domain controller, resulting in a shell with administrative privileges.",
+    "cover": "/posts/hack-the-box-intelligence/cover.png",
+    "tags": [
+      "DNS",
+      "Exiftool",
+      "GMSA"
+    ],
+    "markdown": "/posts/hack-the-box-intelligence/post.md"
+  },
+  {
+    "title": "Hack the Box - Mirai",
+    "slug": "hack-the-box-mirai",
+    "date": "2024-03-14",
+    "excerpt": "Mirai demonstrates one of the fastest-growing attack vectors in modern times; improperly configured IoT devices. This attack vector is constantly on the rise as more and more IoT devices are being created and deployed around the globe, and is actively being exploited by a wide variety of botnets. Internal IoT devices are also being used for long-term persistence by malicious actors.",
+    "cover": "/posts/hack-the-box-mirai/cover.png",
+    "tags": [
+      "IoT"
+    ],
+    "markdown": "/posts/hack-the-box-mirai/post.md"
+  },
+  {
+    "title": "Hack the Box - Monteverde",
+    "slug": "hack-the-box-monteverde",
+    "date": "2024-03-14",
+    "excerpt": "Monteverde is a Medium Windows machine that features Azure AD Connect. The domain is enumerated and a user list is created. Through password spraying, the `SABatchJobs` service account is found to have the username as a password. Using this service account, it is possible to enumerate SMB Shares on the system, and the `$users` share is found to be world-readable. An XML file used for an Azure AD account is found within a user folder and contains a password. Due to password reuse, we can connect to the domain controller as `mhope` using WinRM. Enumeration shows that `Azure AD Connect` is installed. It is possible to extract the credentials for the account that replicates the directory changes to Azure (in this case the default domain administrator).",
+    "cover": "/posts/hack-the-box-monteverde/cover.png",
+    "tags": [
+      "Azure AD",
+      "MSOL",
+      "ADSync"
+    ],
+    "markdown": "/posts/hack-the-box-monteverde/post.md"
+  },
+  {
+    "title": "Hack the Box - Perspective",
+    "slug": "hack-the-box-perspective",
+    "date": "2024-03-14",
+    "excerpt": "Perspective is an insane difficulty Windows machine that focuses on the exploitation of ASP.NET web applications and badly implemented cryptography. Initial access is obtained by reading the application `web.config` file via a Server-Side Include, which is possible due to a weak filter on file upload. Having retrieved the application `machineKey`, a new session cookie can be forged to gain administrative rights and access a restricted area, where SSRF can be exploited to access an internal encryption API which uses a weak RC4 implementation, resulting in the decryption of the `ViewStateUserKey`. Remote command execution is then achieved via deserialisation of a malicious ViewState that can be forged using the obtained application keys. Finally, a padding oracle attack on an internal staging application running with administrative privileges allows to inject OS commands in an encrypted POST parameter, resulting in the elevation of privileges.",
+    "cover": "/posts/hack-the-box-perspective/cover.png",
+    "tags": [
+      "ASP.NET",
+      "SSRF",
+      "Deserialisation",
+      "Command Injection"
+    ],
+    "markdown": "/posts/hack-the-box-perspective/post.md"
+  },
+  {
+    "title": "Hack the Box - Redpanda",
+    "slug": "hack-the-box-redpanda",
+    "date": "2024-03-14",
+    "excerpt": "RedPanda is an easy Linux machine that features a website with a search engine made using the Java Spring Boot framework. This search engine is vulnerable to Server-Side Template Injection and can be exploited to gain a shell on the box as user `woodenk`. Enumerating the processes running on the system reveals a `Java` program that is being run as a cron job as user `root`. Upon reviewing the source code of this program, we can determine that it is vulnerable to XXE. Elevation of privileges is achieved by exploiting the XXE vulnerability in the cron job to obtain the SSH private key for the `root` user. We can then log in as user `root` over SSH and obtain the root flag.",
+    "cover": "/posts/hack-the-box-redpanda/cover.png",
+    "tags": [
+      "SSTI",
+      "XXE",
+      "Source Code Analysis"
+    ],
+    "markdown": "/posts/hack-the-box-redpanda/post.md"
+  },
+  {
+    "title": "Hack the Box - Search",
+    "slug": "hack-the-box-search",
+    "date": "2024-03-14",
+    "excerpt": "Search is a hard difficulty Windows machine that focuses on Active Directory enumeration and exploitation techniques. Foothold is obtained by finding exposed credentials in a web page, enumerating AD users, running a Kerberoast attack to obtain a crackable hash for a service account and spraying the password against a subset of the discovered accounts, obtaining access to a SMB share where a protected XLSX file containing user data is found. Unprotecting the file leads to a second set of credentials, which gives access to another share where PKCS#12 certificates can be downloaded. After importing the certificates into a web browser, Windows PowerShell Web Access can be used to obtain an interactive shell on the system. Due to misconfigured ACLs, the user can retrieve the password of a group managed service account which can change the password of an administrative user, resulting in high-privileged access to the system via `wmiexec` or `psexec`.",
+    "cover": "/posts/hack-the-box-search/cover.png",
+    "tags": [
+      "Kerberoast",
+      "Certificates",
+      "GMSA"
+    ],
+    "markdown": "/posts/hack-the-box-search/post.md"
+  },
+  {
+    "title": "Hacking Silent Sounds Headphones",
+    "slug": "hacking-silent-sounds-headphones",
+    "date": "2024-03-14",
+    "excerpt": "In this post I'll go over how a friend and I were able to modify a pair of Silent Sounds headphones and add bluetooth functionality.",
+    "cover": "/posts/hacking-silent-sounds-headphones/cover.png",
+    "tags": [
+      "Electronics"
+    ],
+    "markdown": "/posts/hacking-silent-sounds-headphones/post.md"
+  },
+  {
+    "title": "Thoughts on eJPT",
+    "slug": "thoughts-on-ejpt",
+    "date": "2024-03-14",
+    "excerpt": "eJPT is a hands-on, entry-level Red Team certification that simulates skills utilized during real-world engagements.",
+    "cover": "/posts/thoughts-on-ejpt/cover.png",
+    "tags": [
+      "eJPT"
+    ],
+    "markdown": "/posts/thoughts-on-ejpt/post.md"
+  }
+]

@@ -1,0 +1,4 @@
+/css                 [36m (Status: 301)[0m [Size: 310][34m [--> http://topology.htb/css/][0m
+/images              [36m (Status: 301)[0m [Size: 313][34m [--> http://topology.htb/images/][0m
+/javascript          [36m (Status: 301)[0m [Size: 317][34m [--> http://topology.htb/javascript/][0m
+/portraits           [36m (Status: 301)[0m [Size: 316][34m [--> http://topology.htb/portraits/][0m

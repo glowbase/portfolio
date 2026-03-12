@@ -1,0 +1,6 @@
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mAdministrador:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::[0m
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mInvitado:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::[0m
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mDefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::[0m
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mWDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:e349e2966c623fcb0a254e866a9a7e4c:::[0m
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mlocaladmin:1001:aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae:::[0m
+[1m[34mSMB[0m         mailing.htb     445    MAILING          [1m[33mmaya:1002:aad3b435b51404eeaad3b435b51404ee:af760798079bf7a3d80253126d3d28af:::[0m

@@ -1,0 +1,94 @@
+# Nmap 7.92 scan initiated Sun Aug 14 20:30:16 2022 as: nmap -sC -sV -v -T4 -Pn -oN scans/nmap_web01.txt 192.168.149.171
+Nmap scan report for 192.168.149.171
+Host is up (0.26s latency).
+Not shown: 991 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+21/tcp   open  ftp           FileZilla ftpd 0.9.41 beta
+| ftp-syst: 
+|_  SYST: UNIX emulated by FileZilla
+80/tcp   open  http          Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+| http-title:  - Research Repo
+|_Requested resource was /ResearchRepo/Login?ReturnUrl=%2f
+135/tcp  open  msrpc         Microsoft Windows RPC
+445/tcp  open  microsoft-ds?
+1433/tcp open  ms-sql-s      Microsoft SQL Server 2019 15.00.2000.00; RTM
+|_ssl-date: 2022-08-14T10:31:46+00:00; 0s from scanner time.
+| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+| Issuer: commonName=SSL_Self_Signed_Fallback
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-07-19T21:17:04
+| Not valid after:  2052-07-19T21:17:04
+| MD5:   8e6e c034 ac1f 4ace acef 1805 1ad5 efe9
+|_SHA-1: f4eb 3d40 a30c 4805 b8e6 6964 2c6b 610b d546 e1df
+| ms-sql-ntlm-info: 
+|   Target_Name: EXAM
+|   NetBIOS_Domain_Name: EXAM
+|   NetBIOS_Computer_Name: WEB01
+|   DNS_Domain_Name: exam.com
+|   DNS_Computer_Name: web01.exam.com
+|   DNS_Tree_Name: exam.com
+|_  Product_Version: 10.0.17763
+3306/tcp open  mysql?
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+|_ssl-date: 2022-08-14T10:31:38+00:00; 0s from scanner time.
+| ssl-cert: Subject: commonName=web01.exam.com
+| Issuer: commonName=web01.exam.com
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-04-26T19:07:32
+| Not valid after:  2022-10-26T19:07:32
+| MD5:   94f9 2ab7 ece9 4d4f 2e6e add8 e98f 73ea
+|_SHA-1: 7d39 1386 39a7 7d24 544b 1337 99c5 5086 a6b1 d7d1
+| rdp-ntlm-info: 
+|   Target_Name: EXAM
+|   NetBIOS_Domain_Name: EXAM
+|   NetBIOS_Computer_Name: WEB01
+|   DNS_Domain_Name: exam.com
+|   DNS_Computer_Name: web01.exam.com
+|   DNS_Tree_Name: exam.com
+|   Product_Version: 10.0.17763
+|_  System_Time: 2022-08-14T10:30:56+00:00
+8080/tcp open  http          Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1h PHP/7.2.34)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/7.2.34
+| http-title: Welcome to XAMPP
+|_Requested resource was http://192.168.149.171:8080/dashboard/
+|_http-favicon: Unknown favicon MD5: 6EB4A43CB64C97F76562AF703893C8FD
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-open-proxy: Proxy might be redirecting requests
+8443/tcp open  http          Apache httpd 2.4.46 (OpenSSL/1.1.1h PHP/7.2.34)
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1h PHP/7.2.34
+| http-title: Welcome to XAMPP
+|_Requested resource was http://192.168.149.171:8443/dashboard/
+|_http-favicon: Unknown favicon MD5: 6EB4A43CB64C97F76562AF703893C8FD
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+Service Info: Host: localhost; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2022-08-14T10:31:00
+|_  start_date: N/A
+| ms-sql-info: 
+|   192.168.149.171:1433: 
+|     Version: 
+|       name: Microsoft SQL Server 2019 RTM
+|       number: 15.00.2000.00
+|       Product: Microsoft SQL Server 2019
+|       Service pack level: RTM
+|       Post-SP patches applied: false
+|_    TCP port: 1433
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Aug 14 20:31:49 2022 -- 1 IP address (1 host up) scanned in 92.47 seconds

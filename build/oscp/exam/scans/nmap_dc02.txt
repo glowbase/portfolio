@@ -1,0 +1,49 @@
+# Nmap 7.92 scan initiated Sun Aug 14 15:10:57 2022 as: nmap -sC -sV -v -T4 -Pn -oN scans/nmap_dc01.txt 192.168.149.170
+Nmap scan report for 192.168.149.170
+Host is up (0.26s latency).
+Not shown: 988 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+53/tcp   open  domain        Simple DNS Plus
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-08-14 05:11:28Z)
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: exam.com0., Site: Default-First-Site-Name)
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  tcpwrapped
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: exam.com0., Site: Default-First-Site-Name)
+3269/tcp open  tcpwrapped
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| ssl-cert: Subject: commonName=dc02.exam.com
+| Issuer: commonName=dc02.exam.com
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-04-26T18:56:32
+| Not valid after:  2022-10-26T18:56:32
+| MD5:   d367 3204 4623 5d6f ada4 0465 aa09 7eb4
+|_SHA-1: 2416 5982 82fc cde2 c1ca 540f a7d2 474c 6057 fc43
+|_ssl-date: 2022-08-14T05:12:23+00:00; 0s from scanner time.
+| rdp-ntlm-info: 
+|   Target_Name: EXAM
+|   NetBIOS_Domain_Name: EXAM
+|   NetBIOS_Computer_Name: DC02
+|   DNS_Domain_Name: exam.com
+|   DNS_Computer_Name: dc02.exam.com
+|   DNS_Tree_Name: exam.com
+|   Product_Version: 10.0.17763
+|_  System_Time: 2022-08-14T05:11:44+00:00
+Service Info: Host: DC02; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2022-08-14T05:11:46
+|_  start_date: N/A
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Aug 14 15:12:30 2022 -- 1 IP address (1 host up) scanned in 93.77 seconds

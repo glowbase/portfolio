@@ -1,0 +1,82 @@
+# Nmap 7.92 scan initiated Tue Jul 26 19:58:55 2022 as: nmap -sC -sV -v -Pn -T4 -p- -oN scans/nmap_full.txt 10.11.1.222
+Warning: 10.11.1.222 giving up on port because retransmission cap hit (6).
+Nmap scan report for 10.11.1.222
+Host is up (0.26s latency).
+Not shown: 65501 closed tcp ports (conn-refused)
+PORT      STATE    SERVICE       VERSION
+135/tcp   open     msrpc         Microsoft Windows RPC
+139/tcp   open     netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp   open     microsoft-ds?
+1521/tcp  open     oracle-tns    Oracle TNS listener 1.2.0.0.0 (unauthorized)
+2030/tcp  open     oracle-mts    Oracle MTS Recovery Service
+2233/tcp  open     infocrypt?
+3389/tcp  open     ms-wbt-server Microsoft Terminal Services
+| rdp-ntlm-info: 
+|   Target_Name: CHRIS
+|   NetBIOS_Domain_Name: CHRIS
+|   NetBIOS_Computer_Name: CHRIS
+|   DNS_Domain_Name: chris
+|   DNS_Computer_Name: chris
+|   Product_Version: 10.0.17763
+|_  System_Time: 2022-07-26T10:15:01+00:00
+|_ssl-date: 2022-07-26T10:15:07+00:00; -5s from scanner time.
+| ssl-cert: Subject: commonName=chris
+| Issuer: commonName=chris
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-07-13T21:56:07
+| Not valid after:  2023-01-12T21:56:07
+| MD5:   40d1 2edc a6d1 25cf 6347 c5bf c944 e9a6
+|_SHA-1: a278 5399 69c0 2a02 b3f0 6e3d c637 8108 7ef3 203b
+5985/tcp  open     http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+6832/tcp  filtered unknown
+8009/tcp  open     ajp13         Apache Jserv (Protocol v1.3)
+| ajp-methods: 
+|_  Supported methods: GET HEAD POST OPTIONS
+8080/tcp  open     http          Apache Tomcat 9.0.19
+|_http-title: Apache Tomcat/9.0.19
+|_http-favicon: Apache Tomcat
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+8507/tcp  filtered unknown
+20483/tcp filtered unknown
+23195/tcp filtered unknown
+35622/tcp filtered unknown
+38274/tcp filtered unknown
+38368/tcp filtered unknown
+38380/tcp filtered unknown
+45941/tcp filtered unknown
+47001/tcp open     http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+47697/tcp filtered unknown
+49664/tcp open     msrpc         Microsoft Windows RPC
+49665/tcp open     msrpc         Microsoft Windows RPC
+49666/tcp open     msrpc         Microsoft Windows RPC
+49667/tcp open     msrpc         Microsoft Windows RPC
+49668/tcp open     msrpc         Microsoft Windows RPC
+49669/tcp open     msrpc         Microsoft Windows RPC
+49670/tcp open     msrpc         Microsoft Windows RPC
+49684/tcp open     msrpc         Microsoft Windows RPC
+49703/tcp open     oracle        Oracle Database
+50605/tcp filtered unknown
+51233/tcp filtered unknown
+51892/tcp filtered unknown
+63290/tcp filtered unknown
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2022-07-26T10:14:59
+|_  start_date: N/A
+|_clock-skew: mean: -4s, deviation: 0s, median: -5s
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Tue Jul 26 20:15:12 2022 -- 1 IP address (1 host up) scanned in 977.30 seconds

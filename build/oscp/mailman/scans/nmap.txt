@@ -1,0 +1,70 @@
+# Nmap 7.92 scan initiated Wed Jul 27 17:23:17 2022 as: nmap -sC -sV -v -Pn -T4 -oN scans/nmap.txt 10.11.1.231
+Increasing send delay for 10.11.1.231 from 10 to 20 due to 11 out of 12 dropped probes since last increase.
+Nmap scan report for 10.11.1.231
+Host is up (0.26s latency).
+Not shown: 65527 closed tcp ports (conn-refused)
+PORT      STATE    SERVICE     VERSION
+22/tcp    open     ssh         OpenSSH 6.7p1 Debian 5+deb8u3 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 b6:8d:1e:f3:80:64:3f:8a:96:52:92:7a:9f:b1:be:67 (DSA)
+|   2048 72:c4:06:a7:2f:71:1b:6a:6b:57:fe:cf:ad:3f:9c:16 (RSA)
+|_  256 6b:c6:6e:fb:ba:06:dc:23:f9:3e:01:a6:2a:87:48:1a (ECDSA)
+25/tcp    open     smtp        Postfix smtpd
+| ssl-cert: Subject: commonName=localhost.localdomain
+| Issuer: commonName=localhost.localdomain
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2013-05-05T06:42:26
+| Not valid after:  2023-05-03T06:42:26
+| MD5:   2c35 f35e 5952 898d 73e2 e771 e525 cd99
+|_SHA-1: 9588 1649 542b 9837 58d2 7e2e 2645 676a 9822 d3a6
+|_ssl-date: TLS randomness does not represent time
+|_smtp-commands: mail.local, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN
+111/tcp   open     rpcbind     2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|_  100000  3,4          111/udp6  rpcbind
+139/tcp   open     netbios-ssn Samba smbd 3.X - 4.X (workgroup: SECURITY)
+445/tcp   open     netbios-ssn Samba smbd 4.2.10-Debian (workgroup: SECURITY)
+10946/tcp filtered unknown
+13584/tcp filtered unknown
+27659/tcp filtered unknown
+Service Info: Hosts:  mail.local, MAILMAN; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: 1h19m56s, deviation: 2h18m34s, median: -3s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| nbstat: NetBIOS name: MAILMAN, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| Names:
+|   MAILMAN<00>          Flags: <unique><active>
+|   MAILMAN<03>          Flags: <unique><active>
+|   MAILMAN<20>          Flags: <unique><active>
+|   \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+|   SECURITY<00>         Flags: <group><active>
+|   SECURITY<1d>         Flags: <unique><active>
+|_  SECURITY<1e>         Flags: <group><active>
+| smb2-time: 
+|   date: 2022-07-27T09:40:40
+|_  start_date: N/A
+| smb2-security-mode: 
+|   3.0: 
+|_    Message signing enabled but not required
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.2.10-Debian)
+|   Computer name: mailman
+|   NetBIOS computer name: MAILMAN\x00
+|   Domain name: local
+|   FQDN: mailman.local
+|_  System time: 2022-07-27T05:40:40-04:00
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Wed Jul 27 19:40:53 2022 -- 1 IP address (1 host up) scanned in 19101.93 seconds

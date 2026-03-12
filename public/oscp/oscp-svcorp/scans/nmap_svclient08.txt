@@ -1,0 +1,57 @@
+# Nmap 7.92 scan initiated Thu Aug  4 16:11:03 2022 as: nmap -sC -sV -v -T4 -oN scans/nmap_svclient08.txt 10.11.1.22
+Increasing send delay for 10.11.1.22 from 5 to 10 due to 11 out of 20 dropped probes since last increase.
+Nmap scan report for 10.11.1.22
+Host is up (0.29s latency).
+Not shown: 996 closed tcp ports (conn-refused)
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds  Windows 10 Pro N 14393 microsoft-ds (workgroup: svcorp)
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| rdp-ntlm-info: 
+|   Target_Name: svcorp
+|   NetBIOS_Domain_Name: svcorp
+|   NetBIOS_Computer_Name: SVCLIENT08
+|   DNS_Domain_Name: svcorp.com
+|   DNS_Computer_Name: svclient08.svcorp.com
+|   DNS_Tree_Name: svcorp.com
+|   Product_Version: 10.0.14393
+|_  System_Time: 2022-08-04T06:11:43+00:00
+| ssl-cert: Subject: commonName=svclient08.svcorp.com
+| Issuer: commonName=svclient08.svcorp.com
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-08-03T04:22:20
+| Not valid after:  2023-02-02T04:22:20
+| MD5:   7bae d880 c919 6f4c 389b 614d e31f 080b
+|_SHA-1: ee14 9d18 aef2 eeb5 dd45 cb27 ddb8 35ac 2349 cd34
+|_ssl-date: 2022-08-04T06:11:57+00:00; -1s from scanner time.
+Service Info: Host: SVCLIENT08; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2022-08-04T06:11:44
+|_  start_date: 2021-07-26T21:29:17
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb-os-discovery: 
+|   OS: Windows 10 Pro N 14393 (Windows 10 Pro N 6.3)
+|   OS CPE: cpe:/o:microsoft:windows_10::-
+|   Computer name: svclient08
+|   NetBIOS computer name: SVCLIENT08\x00
+|   Domain name: svcorp.com
+|   Forest name: svcorp.com
+|   FQDN: svclient08.svcorp.com
+|_  System time: 2022-08-04T07:11:46+01:00
+|_clock-skew: mean: -11m59s, deviation: 26m47s, median: -1s
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Aug  4 16:11:58 2022 -- 1 IP address (1 host up) scanned in 55.32 seconds

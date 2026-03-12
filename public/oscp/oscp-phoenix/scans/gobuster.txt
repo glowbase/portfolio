@@ -1,0 +1,4 @@
+/manual               (Status: 301) [Size: 307] [--> http://10.11.1.8/manual/]
+/usage                (Status: 403) [Size: 282]
+/robots.txt           (Status: 200) [Size: 53]
+/internal             (Status: 301) [Size: 309] [--> http://10.11.1.8/internal/]

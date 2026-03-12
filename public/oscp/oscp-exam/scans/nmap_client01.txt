@@ -1,0 +1,31 @@
+# Nmap 7.92 scan initiated Sun Aug 14 15:20:20 2022 as: nmap -sC -sV -v -T4 -Pn -oN scans/nmap_client01.txt 192.168.149.172
+Nmap scan report for 192.168.149.172
+Host is up (0.25s latency).
+Not shown: 998 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| rdp-ntlm-info: 
+|   Target_Name: EXAM
+|   NetBIOS_Domain_Name: EXAM
+|   NetBIOS_Computer_Name: CLIENT01
+|   DNS_Domain_Name: exam.com
+|   DNS_Computer_Name: client01.exam.com
+|   DNS_Tree_Name: exam.com
+|   Product_Version: 10.0.18362
+|_  System_Time: 2022-08-14T05:20:45+00:00
+| ssl-cert: Subject: commonName=client01.exam.com
+| Issuer: commonName=client01.exam.com
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2022-04-26T19:07:45
+| Not valid after:  2022-10-26T19:07:45
+| MD5:   3a48 24dd c895 8ae8 f4dd ea64 f16b 82fe
+|_SHA-1: 1b29 8bc2 df14 e02c e94c 10dd eda0 1e4d 3b28 e8a6
+|_ssl-date: 2022-08-14T05:20:48+00:00; -1s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Aug 14 15:20:49 2022 -- 1 IP address (1 host up) scanned in 28.83 seconds
