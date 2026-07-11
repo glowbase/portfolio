@@ -1,5 +1,18 @@
 [
   {
+    "title": "My Personal Enterprise Environment",
+    "slug": "my-personal-enterprise-environment",
+    "date": "2026-05-31",
+    "excerpt": "What started as an old Lenovo laptop back in 2016 running a Windows file share has evolved into a small enterprise-style environment that allows me to learn, experiment, and build skills that directly support my career in cyber security, systems administration, and infrastructure engineering.",
+    "cover": "/posts/my-personal-enterprise-environment/cover.png",
+    "tags": [
+      "Active Directory",
+      "Servers",
+      "Homelab"
+    ],
+    "markdown": "/posts/my-personal-enterprise-environment/post.md"
+  },
+  {
     "title": "Hack the Box - Active",
     "slug": "hack-the-box-active",
     "date": "2024-03-14",
@@ -581,5 +594,14 @@
       "eJPT"
     ],
     "markdown": "/posts/thoughts-on-ejpt/post.md"
+  },
+  {
+    "title": "my-personal-enterprise-environment",
+    "slug": "my-personal-enterprise-environment",
+    "date": null,
+    "excerpt": "",
+    "cover": null,
+    "tags": [],
+    "markdown": "/posts/my-personal-enterprise-environment/post.md"
   }
 ]

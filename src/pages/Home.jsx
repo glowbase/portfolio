@@ -15,15 +15,26 @@ export default function Home() {
 
   const socialItems = [
     { icon: Github, href: "https://github.com/glowbase", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/cooperbeltrami", label: "LinkedIn" },
+    // { icon: Linkedin, href: "https://www.linkedin.com/in/cooperbeltrami", label: "LinkedIn" },
     { icon: Box, href: "https://app.hackthebox.com/public/users/200316", label: "HackTheBox" },
   ];
 
   const jobs = [
     {
-      company: "Department of Defence",
-      title: "Assistant Technical Lead",
+      company: "Australian Government",
+      title: "Detection Engineering & Uplift",
       period: "2022 — Present",
+      points: [
+        "Lead initiatives to uplift detection maturity, focusing on coverage, quality, and operational efficiency.",
+        "Identify gaps in visibility and implement improvements across telemetry, detections, and processes.",
+        "Drive continuous improvement of detection engineering practices through tuning, validation, and optimisation.",
+        "Collaborate across teams to enhance security tooling, infrastructure, and overall defensive capability."
+      ],
+    },
+    {
+      company: "Australian Government",
+      title: "Assistant Technical Lead",
+      period: "2025 — 2026",
       points: [
         "Support MDR teams in coordinating and leading complex incident investigations.",
         "Provide technical guidance to analysts during security event triage, threat analysis, and incident response within a large and complex operational environment.",
@@ -32,7 +43,17 @@ export default function Home() {
       ],
     },
     {
-      company: "Department of Defence",
+      company: "Australian Government",
+      title: "Cyber Analyst",
+      period: "2022 — 2025",
+      points: [
+        "Conducted cyber threat monitoring, analysis, and incident response across Defence networks and systems.",
+        "Investigated security events and vulnerabilities to identify risks and support cyber defence operations.",
+        "Utilised cyber security tools and intelligence to detect, assess, and respond to malicious activity."
+      ],
+    },
+    {
+      company: "Australian Government",
       title: "Cyber Security & Robotics Program",
       period: "Jun 2019",
       points: [
@@ -212,7 +233,7 @@ export default function Home() {
         </div>
       </aside>
 
-      <aside className="fixed bottom-0 right-8 hidden lg:block">
+      {/* <aside className="fixed bottom-0 right-8 hidden lg:block">
         <div className="flex flex-col items-center gap-6">
           <a
             href="mailto:mail@cooperbeltra.me"
@@ -222,7 +243,7 @@ export default function Home() {
           </a>
           <div className="h-24 w-px bg-[#a8b2d1]" />
         </div>
-      </aside>
+      </aside> */}
 
       <main className="mx-auto max-w-6xl px-6 pt-28 md:px-12 lg:px-24">
         <section id="hero" className="flex min-h-screen items-start pt-32 lg:pt-60">
@@ -236,7 +257,7 @@ export default function Home() {
             </h2>
             <p className="mt-6 max-w-xl leading-8 text-[#8b95a7]">
               I&apos;m a senior cyber security analyst focused on large scale monitoring and detection,
-              coordinating incident response within Australia's fourth largest network.
+              coordinating incident response within one of Australia's largest networks.
             </p>
             <Link
               to="/blog"
@@ -252,7 +273,7 @@ export default function Home() {
           <div className="mt-10 grid gap-12 md:grid-cols-[3fr_2fr] md:items-start">
             <div className="space-y-4 text-base leading-8 text-[#8892b0]">
               <p>
-                Hello! I'm a senior cyber security analyst focused on large scale monitoring and detection, coordinating incident response within Australia's fourth largest network.
+                Hello! I'm a senior cyber security analyst focused on large scale monitoring and detection, coordinating incident response within one of Australia's largest networks.
 
                 I enjoy understanding how systems work and how they break. My work spans cyber operations, detection engineering, infrastructure, and building tooling to improve security operations.
               </p>
