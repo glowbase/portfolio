@@ -150,7 +150,7 @@ cat user.txt;ipconfig
 
 ## Shell as ArkSvc
 
-### Bloodhound
+### BloodHound
 Before moving on, let's dump domain objects and load up Bloodhound to help figure out where to move next.
 
 ```bash

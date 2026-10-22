@@ -114,7 +114,7 @@ evil-winrm -i forest.htb -u svc-alfresco -p s3rvice
 
 ## Shell as Administrator
 
-### Bloodhound
+### BloodHound
 
 We'll start by dumping domain objects using `bloodhound-python` and then importing these into `bloodhound`.
 

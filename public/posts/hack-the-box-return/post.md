@@ -2,15 +2,14 @@
 title: "Hack the Box - Return"
 slug: "hack-the-box-return"
 date: "2024-03-14"
-excerpt: "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. User found to be part of a privilege group which further exploited to gain system access."
+excerpt: "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. The user is a member of a privileged group, which is then abused to gain SYSTEM access."
 cover: "cover.png"
 tags:
   - LDAP
   - VSS
 ---
 
-## Writeup
-### Foothold
+## Foothold
 
 Website being hosted on port `80`.
 
@@ -34,7 +33,6 @@ Now we can send the request again but replace `printer.return.local` with our lo
 
 And we get an event on `responder`.
 
-
 ![Responder](./evidence/screenshots/responder.png)
 
 We can try using these credentials to login to the target via WinRM since it looks like it's open according to `crackmapexec`.
@@ -53,7 +51,7 @@ evil-winrm -i return.htb -u svc-printer -p '1edFg43012!!'
 
 ![Evil WinRM](./evidence/screenshots/evilwinrm.png)
 
-### Privilege Escalation
+## Privilege Escalation
 
 Perfect, we now have shell access. Let's start enumerating the target.
 

@@ -3,7 +3,7 @@
     "title": "My Personal Enterprise Environment",
     "slug": "my-personal-enterprise-environment",
     "date": "2026-05-31",
-    "excerpt": "What started as an old Lenovo laptop back in 2016 running a Windows file share has evolved into a small enterprise-style environment that allows me to learn, experiment, and build skills that directly support my career in cyber security, systems administration, and infrastructure engineering.",
+    "excerpt": "What started as an old Lenovo laptop in 2016 running a Windows file share has grown into a small enterprise-style environment that I use to learn, experiment, and build skills that support my career in cyber security, systems administration, and infrastructure engineering.",
     "cover": "/posts/my-personal-enterprise-environment/cover.png",
     "tags": [
       "Active Directory",
@@ -29,10 +29,10 @@
     "title": "Hack the Box - Blackfield",
     "slug": "hack-the-box-blackfield",
     "date": "2024-03-14",
-    "excerpt": "Backfield is a hard difficulty Windows machine featuring Windows and Active Directory misconfigurations. Anonymous / Guest access to an SMB share is used to enumerate users. Once user is found to have Kerberos pre-authentication disabled, which allows us to conduct an ASREPRoasting attack. This allows us to retrieve a hash of the encrypted material contained in the AS-REP, which can be subjected to an offline brute force attack in order to recover the plaintext password. With this user we can access an SMB share containing forensics artefacts, including an lsass process dump. This contains a username and a password for a user with WinRM privileges, who is also a member of the Backup Operators group. The privileges conferred by this privileged group are used to dump the Active Directory database, and retrieve the hash of the primary domain administrator.",
+    "excerpt": "Blackfield is a hard difficulty Windows machine featuring Windows and Active Directory misconfigurations. Anonymous / Guest access to an SMB share is used to enumerate users. Once user is found to have Kerberos pre-authentication disabled, which allows us to conduct an ASREPRoasting attack. This allows us to retrieve a hash of the encrypted material contained in the AS-REP, which can be subjected to an offline brute force attack in order to recover the plaintext password. With this user we can access an SMB share containing forensics artefacts, including an lsass process dump. This contains a username and a password for a user with WinRM privileges, who is also a member of the Backup Operators group. The privileges conferred by this privileged group are used to dump the Active Directory database, and retrieve the hash of the primary domain administrator.",
     "cover": "/posts/hack-the-box-blackfield/cover.png",
     "tags": [
-      "ASREPRoasing",
+      "ASREPRoast",
       "Backup Operators",
       "WinRM",
       "LSASS",
@@ -71,7 +71,7 @@
     "title": "Hack the Box - Faculty",
     "slug": "hack-the-box-faculty",
     "date": "2024-03-14",
-    "excerpt": "Faculty is a medium Linux machine that features a PHP web application that uses a library which is vulnerable to local file inclusion. Exploiting the LFi in this library reveals a password which can be used to log in as a low-level user called `gbyolo` over SSH. The user `gbyolo` has permission to run an `npm` package called `meta-git` as the `developer` user. The version of the `meta-git` installed on this box is vulnerable to code injection, which can be exploited to escalate the privileges to the user `developer`. The privilege escalation to `root` can be performed by exploiting the `CAP_SYS_PTRACE` capability to inject shellcode into a process running as `root`.",
+    "excerpt": "Faculty is a medium Linux machine that features a PHP web application that uses a library which is vulnerable to local file inclusion. Exploiting the LFI in this library reveals a password which can be used to log in as a low-level user called `gbyolo` over SSH. The user `gbyolo` has permission to run an `npm` package called `meta-git` as the `developer` user. The version of the `meta-git` installed on this box is vulnerable to code injection, which can be exploited to escalate the privileges to the user `developer`. The privilege escalation to `root` can be performed by exploiting the `CAP_SYS_PTRACE` capability to inject shellcode into a process running as `root`.",
     "cover": "/posts/hack-the-box-faculty/cover.png",
     "tags": [
       "CAP_SYS_PTRACE",
@@ -203,7 +203,7 @@
     "title": "Hack the Box - Opensource",
     "slug": "hack-the-box-opensource",
     "date": "2024-03-14",
-    "excerpt": "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Virtual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell.",
+    "excerpt": "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Visual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell.",
     "cover": "/posts/hack-the-box-opensource/cover.png",
     "tags": [
       "Git",
@@ -254,6 +254,19 @@
     "markdown": "/posts/hack-the-box-redpanda/post.md"
   },
   {
+    "title": "Hack the Box - Reel",
+    "slug": "hack-the-box-reel",
+    "date": "2024-03-14",
+    "excerpt": "Reel is a hard difficulty Windows machine that starts with a phishing attack: a malicious RTF file is emailed to a user to exploit CVE-2017-0199 and gain a foothold as `nico`. Stored credentials lead to lateral movement to `tom`, and BloodHound reveals an Active Directory ACL path that is abused to escalate to the domain administrator.",
+    "cover": "/posts/hack-the-box-reel/cover.png",
+    "tags": [
+      "Phishing",
+      "CVE-2017-0199",
+      "BloodHound"
+    ],
+    "markdown": "/posts/hack-the-box-reel/post.md"
+  },
+  {
     "title": "Hack the Box - Resolute",
     "slug": "hack-the-box-resolute",
     "date": "2024-03-14",
@@ -270,7 +283,7 @@
     "title": "Hack the Box - Return",
     "slug": "hack-the-box-return",
     "date": "2024-03-14",
-    "excerpt": "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. User found to be part of a privilege group which further exploited to gain system access.",
+    "excerpt": "Return is an easy difficulty Windows machine featuring a network printer administration panel that stores LDAP credentials. These credentials can be captured by inputting a malicious LDAP server which allows obtaining foothold on the server through the WinRM service. The user is a member of a privileged group, which is then abused to gain SYSTEM access.",
     "cover": "/posts/hack-the-box-return/cover.png",
     "tags": [
       "LDAP",
@@ -295,7 +308,7 @@
     "title": "Hack the Box - Scrambled",
     "slug": "hack-the-box-scrambled",
     "date": "2024-03-14",
-    "excerpt": "Scrambled is a medium Windows Active Directory machine. Enumerating the website hosted on the remote machine a potential attacker is able to deduce the credentials for the user `ksimpson`. On the website, it is also stated that NTLM authentication is disabled meaning that Kerberos authentication is to be used. Accessing the `Public` share with the credentials of `ksimpson`, a PDF file states that an attacker retrieved the credentials of an SQL database. This is a hint that there is an SQL service running on the remote machine. Enumerating the normal user accounts, it is found that the account `SqlSvc` has a `Service Principal Name` (SPN) associated with it. An attacker can use this information to perform an attack that is knows as `kerberoasting` and get the hash of `SqlSvc`. After cracking the hash and acquiring the credentials for the `SqlSvc` account an attacker can perform a `silver ticket` attack to forge a ticket and impersonate the user `Administrator` on the remote MSSQL service. Enumeration of the database reveals the credentials for user `MiscSvc`, which can be used to execute code on the remote machine using PowerShell remoting. System enumeration as the new user reveals a `.NET` application, which is listening on port `4411`. Reverse engineering the application reveals that it is using the insecure `Binary Formatter` class to transmit data, allowing the attacker to upload their own payload and get code execution as `NT AUTHORITY/SYSTEM`.",
+    "excerpt": "Scrambled is a medium Windows Active Directory machine. Enumerating the website hosted on the remote machine a potential attacker is able to deduce the credentials for the user `ksimpson`. On the website, it is also stated that NTLM authentication is disabled meaning that Kerberos authentication is to be used. Accessing the `Public` share with the credentials of `ksimpson`, a PDF file states that an attacker retrieved the credentials of an SQL database. This is a hint that there is an SQL service running on the remote machine. Enumerating the normal user accounts, it is found that the account `SqlSvc` has a `Service Principal Name` (SPN) associated with it. An attacker can use this information to perform an attack known as `kerberoasting` and get the hash of `SqlSvc`. After cracking the hash and acquiring the credentials for the `SqlSvc` account an attacker can perform a `silver ticket` attack to forge a ticket and impersonate the user `Administrator` on the remote MSSQL service. Enumeration of the database reveals the credentials for user `MiscSvc`, which can be used to execute code on the remote machine using PowerShell remoting. System enumeration as the new user reveals a `.NET` application, which is listening on port `4411`. Reverse engineering the application reveals that it is using the insecure `Binary Formatter` class to transmit data, allowing the attacker to upload their own payload and get code execution as `NT AUTHORITY/SYSTEM`.",
     "cover": "/posts/hack-the-box-scrambled/cover.png",
     "tags": [
       "MSSQL",
@@ -418,190 +431,5 @@
       "Electronics"
     ],
     "markdown": "/posts/hacking-silent-sounds-headphones/post.md"
-  },
-  {
-    "title": "OffSec - Trick",
-    "slug": "offsec-trick",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-alice/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-alice/post.md"
-  },
-  {
-    "title": "OffSec - Alpha",
-    "slug": "offsec-alpha",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-alpha/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-alpha/post.md"
-  },
-  {
-    "title": "OffSec - Beta",
-    "slug": "offsec-beta",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-beta/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-beta/post.md"
-  },
-  {
-    "title": "OffSec - Bob",
-    "slug": "offsec-bob",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-bob/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-bob/post.md"
-  },
-  {
-    "title": "OffSec - Chris",
-    "slug": "offsec-chris",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-chris/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-chris/post.md"
-  },
-  {
-    "title": "OffSec - Disco",
-    "slug": "offsec-disco",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-disco/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-disco/post.md"
-  },
-  {
-    "title": "OffSec - Exam",
-    "slug": "offsec-exam",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-exam/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-exam/post.md"
-  },
-  {
-    "title": "OffSec - Hotline",
-    "slug": "offsec-hotline",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-hotline/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-hotline/post.md"
-  },
-  {
-    "title": "OffSec - Mailman",
-    "slug": "offsec-mailman",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-mailman/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-mailman/post.md"
-  },
-  {
-    "title": "OffSec - Offsec",
-    "slug": "offsec-offsec",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-offsec/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-offsec/post.md"
-  },
-  {
-    "title": "OffSec - Pain",
-    "slug": "offsec-pain",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-pain/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-pain/post.md"
-  },
-  {
-    "title": "OffSec - Phoenix",
-    "slug": "offsec-phoenix",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-phoenix/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-phoenix/post.md"
-  },
-  {
-    "title": "OffSec - Ralph",
-    "slug": "offsec-ralph",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-ralph/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-ralph/post.md"
-  },
-  {
-    "title": "OffSec - Susie",
-    "slug": "offsec-susie",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-susie/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-susie/post.md"
-  },
-  {
-    "title": "OffSec - SVCorp",
-    "slug": "offsec-svcorp",
-    "date": "2024-03-14",
-    "excerpt": "",
-    "cover": "/posts/offsec-svcorp/cover.png",
-    "tags": [
-      null
-    ],
-    "markdown": "/posts/offsec-svcorp/post.md"
-  },
-  {
-    "title": "Thoughts on eJPT",
-    "slug": "thoughts-on-ejpt",
-    "date": "2024-03-14",
-    "excerpt": "eJPT is a hands-on, entry-level Red Team certification that simulates skills utilized during real-world engagements.",
-    "cover": "/posts/thoughts-on-ejpt/cover.png",
-    "tags": [
-      "eJPT"
-    ],
-    "markdown": "/posts/thoughts-on-ejpt/post.md"
-  },
-  {
-    "title": "my-personal-enterprise-environment",
-    "slug": "my-personal-enterprise-environment",
-    "date": null,
-    "excerpt": "",
-    "cover": null,
-    "tags": [],
-    "markdown": "/posts/my-personal-enterprise-environment/post.md"
   }
 ]

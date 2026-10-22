@@ -2,7 +2,7 @@
 title: "Hack the Box - Opensource"
 slug: "hack-the-box-opensource"
 date: "2024-03-14"
-excerpt: "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Virtual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell."
+excerpt: "OpenSource is an easy difficulty linux machine that features a Python HTTP server listening on port 80. After downloading the web application's source code, a Git repository is identified. Viewing the previous commits on the repository reveals a Visual Studio Code settings file that contains a set of credentials for user `dev01`. Analysis of the application source code reveals that it is vulnerable to unrestricted file uploading and Directory traversal attacks, which can be abused in order to overwrite `views.py` and obtain Remote Command Execution. Users can leverage the RCE to obtain a reverse shell inside a Docker container. The container network can be used to enumerate the host machine internally and identify a `Gitea` instance running on port 3000. The credentials that were identified earlier can be used to login to the `Gitea` instance and download a backup of `dev01` user's SSH keys. After connecting to the host system with SSH, `Pspy` can be used to identify a cron job that is running as `root` and searches for changes in a repository found in the home directory of user `dev01`. The Git configuration file can be edited by the low level user and the `fsmonitor` parameter can be leveraged to obtain a root shell."
 cover: "cover.png"
 tags:
   - Git
@@ -11,8 +11,7 @@ tags:
   - Docker
 ---
 
-## Writeup
-### Foothold
+## Foothold
 
 Download button on website gives you files for the website's source.
 
@@ -109,7 +108,7 @@ curl http://opensource.htb/exec?cmd=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%
 
 ![Foothold Shell](./foothold_shell.png)
 
-### Docker Escape
+## Docker Escape
 
 It looks like we have root already, but it's just because we are inside a Docker container.
 
@@ -186,7 +185,7 @@ ssh -i id_rsa dev01@opensource.htb
 
 ![Host SSH](./host_ssh.png)
 
-### Privilege Escalation
+## Privilege Escalation
 
 Let's start enumerating by first uploading and running `linpeas`.
 

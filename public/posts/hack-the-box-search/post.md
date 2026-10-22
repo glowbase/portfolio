@@ -295,7 +295,7 @@ We can login using their credentials.
 ![](./20220809190734717.png)
 
 ## Pivot to BIR-ADFS-GMSA
-### Bloodhound
+### BloodHound
 ```bash
 bloodhound-python -c All -u sierra.frye -p '$$49=wide=STRAIGHT=jordan=28$$18' -d search.htb -dc search.htb -ns 10.10.11.129
 ```

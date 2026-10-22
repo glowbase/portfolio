@@ -11,7 +11,9 @@ tags:
   - WebHook
 ---
 
-## NMAP
+
+## Enumeration
+### NMAP
 ```bash
 nmap -sC -sV -v -T4 -oN scans/nmap.txt talkative.htb
 ```
@@ -26,7 +28,7 @@ PORT     STATE    SERVICE VERSION
 8082/tcp open     http    Tornado httpd 5.0
 ```
 
-## Website
+### Website
 
 Website on port `80`.
 
@@ -47,7 +49,7 @@ We're able to access the login page but don't have credentials yet.
 
 Both port `8081` and `8082` show `404: Not Found`.
 
-## Jamovi
+### Jamovi
 
 There's a `jamovi` web application hosted on port `8080`.
 
@@ -69,7 +71,9 @@ system("id", intern = TRUE)
 
 ![](./20220715221510.png)  
 
-## RCE
+
+## Foothold
+### RCE
 
 We can replace `id` with a bash reverse shell payload.
 
@@ -122,7 +126,7 @@ I did notice however that it shows the username `Saul` once logged in. `Saul` mu
 
 ![](./20220715224400.png)  
 
-## SSTI
+### SSTI
 
 In the documentation it mentioned that it uses `twig`. Maybe we could get SSTI using `twig`.
 
@@ -159,7 +163,9 @@ ssh saul@172.17.0.1
 
 ![](./20220715225549.png)  
 
-## Tunneling
+
+## Privilege Escalation
+### Tunneling
 
 Let's get [chisel](https://github.com/jpillora/chisel/) onto the target and enumerate the network a bit more.
 
@@ -194,7 +200,7 @@ Setup `foxyproxy` in Firefox.
 
 ![](./20220716102744.png)  
 
-## Rocket Chat
+### Rocket Chat
 
 If you remember from our initial `nmap` scan, port 3000 was filtered. If we try accessing this page now we get a `Rocket Chat` site.
 
@@ -218,7 +224,7 @@ If we look at the results, port `27017` is open on `172.17.0.2`.
 
 ![](./20220716112849.png)  
 
-## MongoDB
+### MongoDB
 
 Install the `mongo` client.
 
@@ -258,7 +264,7 @@ db.users.update(
 )
 ```
 
-## Webhook Shell
+### Webhook Shell
 
 If we reload the page, we see that we get an `Administration` button.
 
@@ -362,7 +368,7 @@ There's two things that stand out to me from the `linpeas` output.
 
 ![](./20220716210714.png)  
 
-## Root
+### Root
 
 The target's capabilities and the fact that `/etc/passwd` is writable. This hints me more towards an `overlayfs` exploit. We can use [shocker](https://github.com/gabrtv/shocker).
 

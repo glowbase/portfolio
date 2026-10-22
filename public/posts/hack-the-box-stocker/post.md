@@ -30,12 +30,12 @@ PORT   STATE SERVICE VERSION
 |_http-server-header: nginx/1.18.0 (Ubuntu)
 ```
 
-## angoose
+## Shell as angoose
 
 ### Website
 We get a simple website on port `80`.
 
-![](evidence/screenshots/20230620210149162.png)
+![](./20230620210149162.png)
 
 If we enumerate subdomains we find `dev.stocker.htb`. Add this to `/etc/hosts`.
 
@@ -43,11 +43,11 @@ If we enumerate subdomains we find `dev.stocker.htb`. Add this to `/etc/hosts`.
 gobuster vhost -u stocker.htb -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -t 50 --append-domain
 ```
 
-![](evidence/screenshots/20230620211333427.png)
+![](./20230620211333427.png)
 
 This brings us to a login portal.
 
-![](evidence/screenshots/20230620211513699.png)
+![](./20230620211513699.png)
 
 ### NoSQL Injection
 We can no NoSQL injection to perform a [basic authentication login bypass](https://book.hacktricks.xyz/pentesting-web/nosql-injection).
@@ -58,17 +58,17 @@ We can no NoSQL injection to perform a [basic authentication login bypass](https
 
 Making sure to change the `Content-Type` to `json` to match the body of our request.
 
-![](evidence/screenshots/20230620211907820.png)
+![](./20230620211907820.png)
 
 We can now login!
 
-![](evidence/screenshots/20230620212251806.png)
+![](./20230620212251806.png)
 
 If we add an item to cart we can view an automatically generated PDF.
 
-![](evidence/screenshots/20230620212429337.png)
+![](./20230620212429337.png)
 
-![](evidence/screenshots/20230620212352084.png)
+![](./20230620212352084.png)
 
 ### XSS
 We can take advantage of the way it's generating PDF's and perform XSS. When submitting the cart, we can change the `title` parameter to include an `iframe` to test our theory.
@@ -77,11 +77,11 @@ We can take advantage of the way it's generating PDF's and perform XSS. When sub
 <iframe src=/etc/passwd height=1000px width=500px></iframe>
 ```
 
-![](evidence/screenshots/20230620213711466.png)
+![](./20230620213711466.png)
 
 If we use `/etc/passwd` we can see it's been rendered in the PDF. We can also see the username `angoose`.
 
-![](evidence/screenshots/20230620220119222.png)
+![](./20230620220119222.png)
 
 We can change our payload to include the website's back-end code to find credentials used to connect the website to a database. Because the website is using the `dev` subdomain we can assume it's in a `/dev` sub-directory on the machine.
 
@@ -89,7 +89,7 @@ We can change our payload to include the website's back-end code to find credent
 <iframe src=/var/www/dev/index.js height='1500' width='500'></iframe>
 ```
 
-![](evidence/screenshots/20230620220311999.png)
+![](./20230620220311999.png)
 
 If we look towards the top of the file we can see the connection string for `mongodb` which contains the credentials `IHeardPassphrasesArePrettySecure`. We can use this in conjunction with the username we just found previously.
 
@@ -103,7 +103,7 @@ We can now use these credentials to get SSH on the machine and grab the `user.tx
 ## Privilege Escalation
 If we look at the user's `sudo` permissions we see that we can run `node` as `root`.
 
-![](evidence/screenshots/20230620220653350.png)
+![](./20230620220653350.png)
 
 We can create a simple `js` script to execute shell commands. In this case we are using it to get a reverse shell.
 
@@ -124,4 +124,4 @@ We can create a simple `js` script to execute shell commands. In this case we ar
 
 If we run the script from the `/usr/local/scripts` directory and use absolute paths back to our current one we can execute the script as root and get our `root.txt` flag.
 
-![](evidence/screenshots/20230620221924595.png)
+![](./20230620221924595.png)

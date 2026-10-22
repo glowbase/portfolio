@@ -125,7 +125,7 @@ net users mhope
 
 ![](./20220808161815.png)  
 
-### Bloodhound
+### BloodHound
 
 We can also check this in bloodhound. First get an object dump and then upload it to bloodhound.
 

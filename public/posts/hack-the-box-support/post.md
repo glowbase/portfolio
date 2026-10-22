@@ -136,7 +136,7 @@ ldapsearch -x -H ldap://support.htb -D 'support\ldap' -w 'nvEfEK16^1aM4$e7AclUf8
 
 ![](./20220731122200.png)  
 
-## Inital Access
+## Initial Access
 
 ### Password Spraying
 
@@ -158,7 +158,7 @@ Let's login using `evil-winrm`.
 evil-winrm -i support.htb -u support -p 'Ironside47pleasure40Watchful'
 ```
 
-### Bloodhound
+### BloodHound
 
 ![](./20220731122543.png)  
 

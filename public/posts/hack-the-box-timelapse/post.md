@@ -9,7 +9,9 @@ tags:
   - LAPS
 ---
 
-## NMAP
+
+## Enumeration
+### NMAP
 ```bash
 nmap -sC -sV -v -Pn -T4 -oN scans/nmap.txt timelapse.htb
 ```
@@ -29,7 +31,7 @@ PORT     STATE SERVICE           VERSION
 3269/tcp open  globalcatLDAPssl?
 ```
 
-## SMB
+### SMB
 
 Port `445` is open which means `SMB` is running.
 
@@ -53,7 +55,9 @@ In the `/Dev` directory there's a `winrm_backup.zip` file. We can use `get` to d
 
 ![](./20220717211656.png)  
 
-## ZIP Password
+
+## Foothold
+### ZIP Password
 
 If we attempt to unzip it, it asks for a password. Let's brute force it using `fcrackzip`.
 
@@ -65,7 +69,7 @@ fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt winrm_backup.zip
 
 Within a few seconds the password `supremelegacy` is found!
 
-## PFX Password
+### PFX Password
 
 Inside the zip folder is a `.pfx` file. We can extract the certificate keys which can then be used to login via `winrm`. We first need to brute force the password to the `.pfx` file using a tool called [crackpkcs12](http://crackpkcs12.sourceforge.net/).
 
@@ -105,7 +109,7 @@ Extract certificate.
 openssl pkcs12 -in legacyy_dev_auth.pfx -clcerts -nokeys -out legacyy.crt
 ```
 
-## Initial Shell
+### Initial Shell
 
 Now we can use `evil-winrm` to get an interactive shell on the target.
 
@@ -125,7 +129,9 @@ Unfortunately we can't use `winpeas` to enumerate the system because it's blocke
 
 ![](./20220717230422.png)  
 
-## Powershell Console History
+
+## Privilege Escalation
+### PowerShell Console History
 
 We'll have to manually enumerate the system. We can use [HackTricks](https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation) as a guide.
 
@@ -149,7 +155,7 @@ Enter each of the commands one by one.
 
 ![](./20220717231046.png)  
 
-## LAPS
+### LAPS
 
 If we look at `svc_deploy`'s groups, it's part of the `LAPS_Readers` group. We can dump the local administrator password.
 
@@ -163,7 +169,7 @@ Get-ADComputer -Identity DC01 -Properties "ms-mcs-AdmPwd"
 
 ![](./20220717232224.png)  
 
-## Administrator
+### Administrator
 
 We can now login as the administrator.
 

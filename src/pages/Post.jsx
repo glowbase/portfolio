@@ -128,7 +128,7 @@ export default function Post() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a192f] px-6 py-24 text-[#8892b0]">
+      <div className="min-h-screen px-6 py-24 text-[#b3b6b7]">
         <div className="mx-auto max-w-5xl">
           <p>Loading post...</p>
         </div>
@@ -138,19 +138,19 @@ export default function Post() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#0a192f] px-6 py-24 text-[#8892b0]">
+      <div className="min-h-screen px-6 py-24 text-[#b3b6b7]">
         <div className="mx-auto max-w-5xl">
-          <nav className="mb-10 font-mono text-sm text-[#8892b0]">
-            <Link to="/" className="transition hover:text-[#f59e0b]">
+          <nav className="mb-10 font-mono text-sm text-[#b3b6b7]">
+            <Link to="/" className="transition hover:text-white">
               Home
             </Link>
-            <span className="mx-2 text-[#5f6b86]">/</span>
-            <Link to="/blog" className="transition hover:text-[#f59e0b]">
+            <span className="mx-2 text-[#525759]">/</span>
+            <Link to="/blog" className="transition hover:text-white">
               Blog
             </Link>
           </nav>
 
-          <h1 className="text-[40px] font-semibold tracking-[-0.03em] text-[#ccd6f6] sm:text-[48px]">
+          <h1 className="text-[40px] font-semibold tracking-[-0.03em] text-white sm:text-[48px]">
             Post not found
           </h1>
         </div>
@@ -159,47 +159,52 @@ export default function Post() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a192f] px-6 py-24 text-[#8892b0]">
+    <div className="min-h-screen px-6 py-24 text-[#b3b6b7]">
       <div className="mx-auto max-w-6xl">
-        <nav className="mb-10 font-mono text-sm text-[#8892b0]">
-          <Link to="/" className="transition hover:text-[#f59e0b]">
+        <nav className="mb-10 font-mono text-sm text-[#b3b6b7]">
+          <Link to="/" className="transition hover:text-white">
             Home
           </Link>
-          <span className="mx-2 text-[#5f6b86]">/</span>
-          <Link to="/blog" className="transition hover:text-[#f59e0b]">
+          <span className="mx-2 text-[#525759]">/</span>
+          <Link to="/blog" className="transition hover:text-white">
             Blog
           </Link>
-          <span className="mx-2 text-[#5f6b86]">/</span>
-          <span className="text-[#f59e0b]">
+          <span className="mx-2 text-[#525759]">/</span>
+          <span className="text-white">
             {post.title}
           </span>
         </nav>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px]">
           <article className="min-w-0">
-            <p className="font-mono text-sm tracking-[0.14em] text-[#f59e0b]">
+            <p className="font-mono text-sm tracking-[0.14em] text-[#ff8a00]">
               {post.date}
             </p>
 
-            <h1 className="mt-4 text-[56px] font-semibold leading-[1.05] tracking-[-0.04em] text-[#ccd6f6] sm:text-[72px] md:text-[80px]">
+            <h1 className="mt-4 text-[56px] font-semibold leading-[1.05] tracking-[-0.04em] text-white sm:text-[72px] md:text-[80px]">
               {post.title}
             </h1>
 
             {post.tags?.length ? (
-              <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-[#a8b2d1]">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
+                  <span
+                    key={tag}
+                    className="rounded-full bg-white/5 px-3 py-1 font-mono text-xs text-[#cfd4d4] ring-1 ring-white/10"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             ) : null}
 
             {post.excerpt && (
-              <p className="mt-6 max-w-3xl leading-9 text-[#8892b0]">
+              <p className="mt-6 max-w-3xl leading-9 text-[#b3b6b7]">
                 {post.excerpt}
               </p>
             )}
 
             {/* {post.cover ? (
-              <div className="mt-10 overflow-hidden rounded-xl ring-1 ring-[#233554]">
+              <div className="mt-10 overflow-hidden rounded-xl ring-1 ring-white/10">
                 <img
                   src={post.cover}
                   alt={post.title}
@@ -208,7 +213,7 @@ export default function Post() {
               </div>
             ) : null} */}
 
-            <div className="mt-12 prose prose-invert max-w-none prose-p:text-[20px] prose-p:leading-8 prose-headings:text-[#ccd6f6] prose-strong:text-[#ccd6f6] prose-a:text-[#f59e0b] prose-li:text-[#8892b0] prose-code:text-[#f59e0b] prose-pre:bg-[#112240] prose-blockquote:border-[#f59e0b]">
+            <div className="mt-12 prose prose-invert max-w-none prose-headings:text-white prose-strong:text-white prose-a:text-[#ff8a00] prose-li:text-[#b3b6b7] prose-code:text-[#ff8a00] prose-pre:bg-transparent prose-blockquote:border-[#ff8a00]">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -219,9 +224,8 @@ export default function Post() {
                     return (
                       <h2
                         id={id}
-                        className="scroll-mt-24 mt-16 text-[34px] font-semibold tracking-[-0.02em] text-[#ccd6f6]"
+                        className="scroll-mt-28 mb-5 mt-14 border-b border-white/10 pb-3 text-[30px] font-semibold tracking-[-0.02em] text-white"
                       >
-                        <span className="mr-3 font-mono text-[#f59e0b]">#</span>
                         {children}
                       </h2>
                     );
@@ -234,16 +238,15 @@ export default function Post() {
                     return (
                       <h3
                         id={id}
-                        className="scroll-mt-24 mt-12 text-[26px] font-semibold text-[#ccd6f6]"
+                        className="scroll-mt-28 mb-3 mt-10 text-[22px] font-semibold text-white"
                       >
-                        <span className="mr-3 font-mono text-[#f59e0b]">##</span>
                         {children}
                       </h3>
                     );
                   },
 
                   p: ({ children }) => (
-                    <p className="text-[20px] leading-9 text-[#8892b0]">
+                    <p className="mt-5 text-[18px] leading-8 text-[#b3b6b7]">
                       {children}
                     </p>
                   ),
@@ -253,7 +256,7 @@ export default function Post() {
 
                     if (!inline && match) {
                       return (
-                        <div className="my-8 mt-2 overflow-hidden rounded-xl bg-[#112240] ring-1 ring-[#233554] shadow-lg shadow-[#020c1b]/40">
+                        <div className="my-6 overflow-hidden rounded-[15px] bg-white/[0.04] ring-1 ring-white/[0.07] backdrop-blur-sm">
                           <SyntaxHighlighter
                             language={match[1]}
                             style={oneDark}
@@ -261,7 +264,7 @@ export default function Post() {
                             customStyle={{
                               margin: 0,
                               padding: "18px",
-                              background: "#112240",
+                              background: "transparent",
                               fontSize: "14px",
                               borderRadius: 0,
                             }}
@@ -279,32 +282,32 @@ export default function Post() {
                     }
 
                     return (
-                      <code className="rounded bg-[#112240] px-1.5 py-1 text-[15px] text-[#f59e0b]">
+                      <code className="rounded bg-white/[0.06] px-1.5 py-1 text-[15px] text-[#ff8a00]">
                         {children}
                       </code>
                     );
                   },
 
                   ul: ({ children }) => (
-                    <ul className="mt-6 list-disc space-y-2 pl-6 text-[20px] leading-9 text-[#8892b0]">
+                    <ul className="my-5 list-disc space-y-2 pl-6 text-[18px] leading-8 text-[#b3b6b7] marker:text-[#ff8a00]">
                       {children}
                     </ul>
                   ),
 
                   ol: ({ children }) => (
-                    <ol className="mt-6 list-decimal space-y-2 pl-6 text-[20px] leading-9 text-[#8892b0]">
+                    <ol className="my-5 list-decimal space-y-2 pl-6 text-[18px] leading-8 text-[#b3b6b7] marker:text-[#ff8a00]">
                       {children}
                     </ol>
                   ),
 
                   blockquote: ({ children }) => (
-                    <blockquote className="my-8 border-l-4 border-[#f59e0b] pl-6 italic text-[#a8b2d1]">
+                    <blockquote className="my-6 border-l-2 border-[#ff8a00] pl-5 italic text-[#cfd4d4]">
                       {children}
                     </blockquote>
                   ),
 
                   table: ({ children }) => (
-                    <div className="my-10 overflow-x-auto">
+                    <div className="my-6 overflow-x-auto">
                       <table className="w-full border-collapse text-left">
                         {children}
                       </table>
@@ -312,13 +315,13 @@ export default function Post() {
                   ),
 
                   th: ({ children }) => (
-                    <th className="border-b border-[#233554] py-3 text-[#ccd6f6]">
+                    <th className="border-b border-white/10 px-4 py-2.5 text-left font-semibold text-white">
                       {children}
                     </th>
                   ),
 
                   td: ({ children }) => (
-                    <td className="border-b border-[#233554] py-3 text-[#8892b0]">
+                    <td className="border-b border-white/[0.07] px-4 py-2.5 text-[#b3b6b7]">
                       {children}
                     </td>
                   ),
@@ -333,7 +336,7 @@ export default function Post() {
                       <img
                         src={resolvedSrc}
                         alt={alt || ""}
-                        className="my-4 rounded-lg"
+                        className="my-6 rounded-[10px] ring-1 ring-white/10"
                       />
                     );
                   },
@@ -345,8 +348,8 @@ export default function Post() {
           </article>
 
           <aside className="hidden lg:block">
-            <div className="sticky top-24 rounded-xl border border-[#233554] bg-[#112240] p-5">
-              <p className="font-mono text-sm tracking-[0.14em] text-[#f59e0b]">
+            <div className="sticky top-24 rounded-[15px] bg-white/[0.02] p-5 ring-1 ring-white/[0.07] backdrop-blur-sm">
+              <p className="font-mono text-sm tracking-[0.14em] text-[#ff8a00]">
                 Table of Contents
               </p>
 
@@ -361,8 +364,8 @@ export default function Post() {
                         href={`#${heading.id}`}
                         className={`text-[15px] leading-6 transition ${
                           activeHeading === heading.id
-                            ? "text-[#f59e0b]"
-                            : "text-[#a8b2d1] hover:text-[#f59e0b]"
+                            ? "text-[#ff8a00]"
+                            : "text-[#6e7578] hover:text-white"
                         }`}
                       >
                         {heading.text}
@@ -371,7 +374,7 @@ export default function Post() {
                   ))}
                 </ul>
               ) : (
-                <p className="mt-4 text-sm text-[#8892b0]">
+                <p className="mt-4 text-sm text-[#b3b6b7]">
                   No section headings found.
                 </p>
               )}

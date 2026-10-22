@@ -32,7 +32,7 @@ PORT   STATE SERVICE VERSION
 Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-## svc
+## Shell as svc
 
 ### Website
 If we try and access the website it doesn't load. If we use `curl` we can see we're being redirected to `searcher.htb`. Let's add this to our `/etc/hosts`.

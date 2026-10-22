@@ -143,7 +143,7 @@ There's a note on `ryan`'s desktop.
 
 ![](./20220804224550.png)  
 
-### Bloodhound
+### BloodHound
 
 Use `bloodhound-python` to dump domain objects to analyse within `bloodhound`.
 

