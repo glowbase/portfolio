@@ -102,28 +102,39 @@ export default function Post() {
   useEffect(() => {
     if (!headings.length) return;
 
-    const observers = [];
+    const updateActive = () => {
+      const offset = 140; // a heading counts as "current" once within 140px of the top
+      let current = headings[0].id;
 
-    headings.forEach((heading) => {
-      const element = document.getElementById(heading.id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveHeading(heading.id);
-          }
-        },
-        {
-          rootMargin: "-40% 0px -55% 0px",
+      for (const heading of headings) {
+        const element = document.getElementById(heading.id);
+        if (!element) continue;
+        if (element.getBoundingClientRect().top - offset <= 0) {
+          current = heading.id;
+        } else {
+          break;
         }
-      );
+      }
 
-      observer.observe(element);
-      observers.push(observer);
-    });
+      // Pin to the last heading once scrolled to the very bottom.
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        current = headings[headings.length - 1].id;
+      }
 
-    return () => observers.forEach((observer) => observer.disconnect());
+      setActiveHeading(current);
+    };
+
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+    };
   }, [headings]);
 
   if (loading) {
@@ -354,24 +365,26 @@ export default function Post() {
               </p>
 
               {headings.length ? (
-                <ul className="mt-4 space-y-3">
-                  {headings.map((heading) => (
-                    <li
-                      key={heading.id}
-                      className={heading.level === 3 ? "ml-4" : ""}
-                    >
-                      <a
-                        href={`#${heading.id}`}
-                        className={`text-[15px] leading-6 transition ${
-                          activeHeading === heading.id
-                            ? "text-[#ff8a00]"
-                            : "text-[#6e7578] hover:text-white"
-                        }`}
-                      >
-                        {heading.text}
-                      </a>
-                    </li>
-                  ))}
+                <ul className="mt-4 border-l border-white/10">
+                  {headings.map((heading) => {
+                    const active = activeHeading === heading.id;
+                    return (
+                      <li key={heading.id}>
+                        <a
+                          href={`#${heading.id}`}
+                          className={`-ml-px block border-l-2 py-1.5 text-[15px] leading-6 transition ${
+                            heading.level === 3 ? "pl-7" : "pl-4"
+                          } ${
+                            active
+                              ? "border-[#ff8a00] font-medium text-[#ff8a00]"
+                              : "border-transparent text-[#6e7578] hover:border-white/30 hover:text-white"
+                          }`}
+                        >
+                          {heading.text}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : (
                 <p className="mt-4 text-sm text-[#b3b6b7]">

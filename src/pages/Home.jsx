@@ -267,11 +267,14 @@ export default function Home() {
               <span className="text-[#6e7578]">:~$</span>{" "}
               <TypeCycle
                 phrases={[
-                  "detecting threats",
+                  "reading documentation",
+                  "frying electronics",
+                  "blaming DNS",
+                  "googling error messages",
+                  "waiting for nmap to finish",
+                  "turning it off and on again",
+                  "patching on a Friday",
                   "hunting adversaries",
-                  "breaking into boxes",
-                  "building homelabs",
-                  "writing detections",
                 ]}
               />
             </div>
