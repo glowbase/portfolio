@@ -171,9 +171,11 @@ export default function Home() {
 
             <Link
               to="/blog"
-              className="rounded-full bg-white px-5 py-2 text-sm font-medium text-black transition hover:bg-[#cfd4d4]"
+              className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium leading-none text-black transition hover:bg-[#cfd4d4]"
               >
-              Blog
+              <div style={{ paddingTop: "4px" }}>
+                Blog
+              </div>  
             </Link>
         </nav>
 
@@ -220,7 +222,7 @@ export default function Home() {
                 <Link
                   to="/blog"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-2 rounded-full bg-white px-5 py-2 text-sm font-medium text-black"
+                  className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium leading-none text-black"
                   >
                   Blog
                 </Link>
@@ -252,7 +254,7 @@ export default function Home() {
       </aside>
 
       <main className="mx-auto max-w-6xl px-6 pt-28 md:px-12 lg:px-24">
-        <section id="hero" className="flex min-h-screen items-start pt-32 lg:pt-60">
+        <section id="hero" className="flex min-h-[calc(100vh-7rem)] items-center py-16">
           <div className="max-w-3xl">
             <p className="mb-5 font-mono text-[14px] tracking-[0.15em] text-[#ff8a00] md:text-[15px]">Hi, my name is</p>
             <h1 className="font-sans text-[56px] font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-[72px] md:text-[80px]">
@@ -280,9 +282,11 @@ export default function Home() {
             </div>
             <Link
               to="/blog"
-              className="mt-10 inline-block rounded-full bg-white px-7 py-3.5 text-base font-medium text-black transition hover:bg-[#cfd4d4]"
+              className="mt-10 inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-base font-medium leading-none text-black transition hover:bg-[#cfd4d4]"
             >
-              Check out my blog!
+              <div style={{ paddingTop: "5px" }}>
+                Check out my blog!
+              </div>
             </Link>
           </div>
         </section>
